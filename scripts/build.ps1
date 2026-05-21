@@ -28,7 +28,7 @@ if ($Clean) {
 Write-Output "Building with '$Configuration' configuration..."
 $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath
 $msBuildPath = Join-Path $vsPath "MSBuild\Current\Bin\MSBuild.exe"
-& $msBuildPath /p:Configuration=$Configuration /p:Platform=x86 RSBot.sln | Tee-Object -FilePath build.log
+& $msBuildPath /p:Configuration=$Configuration /p:Platform=x86 OasisBot.sln | Tee-Object -FilePath build.log
 $buildExitCode = $LASTEXITCODE
 
 if ($Clean) {

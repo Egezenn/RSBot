@@ -25,7 +25,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Handle dependencies
-        run: dotnet restore RSBot.sln
+        run: dotnet restore OasisBot.sln
 
       - name: Run CSharpier
         run: |

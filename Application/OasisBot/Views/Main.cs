@@ -32,6 +32,7 @@ public partial class Main : UIWindow
     private string _playerName;
     private readonly Dictionary<string, UIWindow> _pluginWindows = new(8);
     private bool _isWindowLoaded;
+    private SDUI.Controls.Button btnStartSetArea;
 
     #endregion Members
 
@@ -54,6 +55,7 @@ public partial class Main : UIWindow
         notifyIcon.Icon = Properties.Resources.tray;
 
         Shown += Main_Shown;
+        InitializeCustomButtons();
     }
 
     #endregion Constructor
@@ -521,6 +523,82 @@ public partial class Main : UIWindow
     }
 
     /// <summary>
+    ///     Initializes custom buttons.
+    /// </summary>
+    private void InitializeCustomButtons()
+    {
+        btnStartSetArea = new SDUI.Controls.Button
+        {
+            Anchor = AnchorStyles.Top | AnchorStyles.Right,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            BackColor = Color.FromArgb(90, 75, 215),
+            Color = Color.FromArgb(90, 75, 215),
+            Font = btnSave.Font,
+            ForeColor = Color.White,
+            Size = new Size((int)(btnSave.Width * 1.28), btnSave.Height),
+            TabIndex = 2,
+            TabStop = false,
+            Tag = "private",
+            Text = "START + SET AREA",
+            UseVisualStyleBackColor = false
+        };
+
+        var gap = btnStartStop.Left - (btnSave.Left + btnSave.Width);
+        if (gap <= 0) gap = 6;
+
+        btnStartSetArea.Location = new Point(btnSave.Left - btnStartSetArea.Width - gap, btnSave.Top);
+
+        btnStartSetArea.Click += btnStartSetArea_Click;
+        bottomPanel.Controls.Add(btnStartSetArea);
+    }
+
+    /// <summary>
+    ///     Handles the Click event of the btnStartSetArea control.
+    /// </summary>
+    private void btnStartSetArea_Click(object sender, EventArgs e)
+    {
+        if (Kernel.Proxy == null)
+            return;
+
+        if (!Kernel.Proxy.IsConnectedToAgentserver)
+            return;
+
+        if (Kernel.Bot == null)
+        {
+            Log.NotifyLang("NotifyPleaseSelectProperBotBase");
+            return;
+        }
+
+        if (Game.Player == null)
+        {
+            Log.WarnLang("NotifyPlayerWasNull");
+            return;
+        }
+
+        if (!Kernel.Bot.Running)
+        {
+            var pos = Game.Player.Position;
+            PlayerConfig.Set("RSBot.Area.Region", pos.Region);
+            PlayerConfig.Set("RSBot.Area.X", pos.XOffset);
+            PlayerConfig.Set("RSBot.Area.Y", pos.YOffset);
+            PlayerConfig.Set("RSBot.Area.Z", pos.ZOffset);
+
+            EventManager.FireEvent("OnSetTrainingArea");
+
+            Kernel.Bot.Start();
+
+            Log.StatusLang("Running");
+        }
+        else
+        {
+            Log.NotifyLang("StopingBot", Kernel.Bot.BotbaseView?.DisplayName);
+
+            Kernel.Bot.Stop();
+            Log.StatusLang("Ready");
+        }
+    }
+
+    /// <summary>
     ///     Handles the FormClosing event of the Main control.
     /// </summary>
     /// <param name="sender">The source of the event.</param>
@@ -807,6 +885,8 @@ public partial class Main : UIWindow
     private void OnStartBot()
     {
         btnStartStop.Text = LanguageManager.GetLang("StopBot");
+        if (btnStartSetArea != null)
+            btnStartSetArea.Enabled = false;
     }
 
     /// <summary>
@@ -815,6 +895,8 @@ public partial class Main : UIWindow
     private void OnStopBot()
     {
         btnStartStop.Text = LanguageManager.GetLang("StartBot");
+        if (btnStartSetArea != null)
+            btnStartSetArea.Enabled = true;
     }
 
     /// <summary>

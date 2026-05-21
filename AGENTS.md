@@ -9,7 +9,7 @@ The project is built using `MSBuild`.
 - Generic path: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`.
 - Debug flags: `/p:Configuration=Debug /p:Platform=x86`
 - Release flags: `/p:Configuration=Release /p:Platform=x86`
-- Solution to build: `.\RSBot.sln`
+- Solution to build: `.\OasisBot.sln`
 
 - Use `.\scripts\build.ps1` to take builds.
 - For execution policy issues use with `powershell.exe -ExecutionPolicy Bypass .\scripts\build.ps1`
