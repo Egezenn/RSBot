@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="assets/app.ico" alt="RSBot Icon" width="30" height="24" class="d-inline-block align-text-top">
-                RSBot
+                <img src="assets/app.ico" alt="OasisBot Icon" width="30" height="24" class="d-inline-block align-text-top">
+                OasisBot
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Footer
   footer.innerHTML = `
         <div class="container-fluid">
-            <p>RSBot Copyright &copy; 2026 Silkroad Developer Community. All rights reserved.</p>
+            <p>OasisBot Copyright &copy; 2026 Silkroad Developer Community. All rights reserved.</p>
         </div>
     `;
 
@@ -120,4 +120,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-

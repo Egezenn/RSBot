@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RSBot.Training", "Botbases\RSBot.Training\RSBot.Training.csproj", "{BDDCA486-B41F-4CB5-AAB8-F15A5BBD0638}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RSBot", "Application\RSBot\RSBot.csproj", "{259A396E-2479-493E-A360-6CAD48E3CB5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OasisBot", "Application\OasisBot\OasisBot.csproj", "{259A396E-2479-493E-A360-6CAD48E3CB5E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0B1A2F9D-1CCC-4F73-9136-8D1EE5ECEFE3} = {0B1A2F9D-1CCC-4F73-9136-8D1EE5ECEFE3}
 		{0CD455EA-A75D-4273-BE3E-DA570C783726} = {0CD455EA-A75D-4273-BE3E-DA570C783726}

@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [string]$BaseSha,
     [string]$OutputFile = "commit_log.md"
 )
@@ -26,9 +26,10 @@ Write-Host "Fetching GitHub metadata..."
 try {
     # We use -L to follow redirects and -q to filter if needed, 
     # but here we just get all commits to map SHAs.
-    $apiJson = gh api "repos/Silkroad-Developer-Community/RSBot/commits?per_page=100" --paginate
+    $apiJson = gh api "repos/Silkroad-Developer-Community/OasisBot/commits?per_page=100" --paginate
     $apiCommits = $apiJson | ConvertFrom-Json
-} catch {
+}
+catch {
     Write-Error "Failed to fetch data from GitHub API. Ensure GITHUB_TOKEN is set."
     $apiCommits = @()
 }
@@ -43,7 +44,8 @@ foreach ($c in $commits) {
     $authorDisplay = ""
     if ($apiMatch -and $apiMatch.author -and $apiMatch.author.login) {
         $authorDisplay = "@" + $apiMatch.author.login
-    } else {
+    }
+    else {
         # Fallback to local git name if API resolution fails
         $localName = git log -n 1 $c.SHA --format='%an'
         $authorDisplay = $localName.Trim()

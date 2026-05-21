@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>RSBot</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>

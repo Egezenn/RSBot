@@ -66,7 +66,7 @@ jobs:
         if: github.event.inputs.version != ''
         with:
           commit_message: "Version ${{ github.event.inputs.version }}"
-          file_pattern: "Application/RSBot/RSBot.csproj scripts/OasisBot.iss"
+          file_pattern: "Application/OasisBot/OasisBot.csproj scripts/OasisBot.iss"
 
       - name: Create changelog
         if: steps.check_commits.outputs.has_new_commits == 'true'
@@ -87,7 +87,7 @@ jobs:
 
       - name: Handle dependencies
         if: steps.check_commits.outputs.has_new_commits == 'true'
-        run: dotnet restore RSBot.sln
+        run: dotnet restore OasisBot.sln
 
       - name: Build and Bundle
         if: steps.check_commits.outputs.has_new_commits == 'true'

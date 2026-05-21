@@ -54,7 +54,7 @@ if __name__ == "__main__":
     parser.add_argument("--nightly", help="Suffix the project version with -nightly.<date>")
     args = parser.parse_args()
 
-    csproj = os.path.join("Application", "RSBot", "RSBot.csproj")
+    csproj = os.path.join("Application", "OasisBot", "OasisBot.csproj")
     iss = os.path.join("scripts", "OasisBot.iss")
 
     if args.version:
@@ -62,7 +62,7 @@ if __name__ == "__main__":
         print(f"Setting version to: {version}")
         update_csproj_version(csproj, version)
         update_iss_version(iss, version)
-        print("Updated RSBot.csproj and OasisBot.iss")
+        print("Updated OasisBot.csproj and OasisBot.iss")
     elif args.nightly:
         base_version = get_version_from_csproj(csproj)
         if base_version:

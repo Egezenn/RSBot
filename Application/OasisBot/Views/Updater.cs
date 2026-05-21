@@ -17,7 +17,7 @@ public partial class Updater : UIWindow
     /// <summary>
     ///     GitHub update address
     /// </summary>
-    private readonly string _githubUrl = "https://api.github.com/repos/Silkroad-Developer-Community/RSBot/releases";
+    private readonly string _githubUrl = "https://api.github.com/repos/Silkroad-Developer-Community/OasisBot/releases";
 
     /// <summary>
     ///     Localhost update address (for testing)
@@ -174,7 +174,7 @@ public partial class Updater : UIWindow
         try
         {
             _webClient = new WebClient();
-            _webClient.Headers.Add("User-Agent", "RSBot-Updater");
+            _webClient.Headers.Add("User-Agent", "OasisBot-Updater");
             var json = await _webClient.DownloadStringTaskAsync(_updateUrl);
             var releases = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
 
