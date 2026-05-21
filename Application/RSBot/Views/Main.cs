@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -77,7 +77,7 @@ public partial class Main : UIWindow
         if (BackColor.IsDark() == WindowsHelper.IsDark())
             return;
 
-        var detectDarkLight = GlobalConfig.Get("RSBot.Theme.Auto", true);
+        var detectDarkLight = GeneralConfig.Get("RSBot.Theme.Auto", true);
         if (!detectDarkLight)
             return;
 
@@ -472,7 +472,8 @@ public partial class Main : UIWindow
 
         dropdown.Checked = true;
 
-        GlobalConfig.Set("RSBot.Language", Kernel.Language);
+        GeneralConfig.Set("RSBot.Language", Kernel.Language);
+        GeneralConfig.Save();
         GlobalConfig.Save();
     }
 
@@ -521,7 +522,7 @@ public partial class Main : UIWindow
     /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
     private void Main_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (Kernel.Proxy == null || !Kernel.Proxy.ClientConnected || !GlobalConfig.Get("RSBot.showExitDialog", true))
+        if (Kernel.Proxy == null || !Kernel.Proxy.ClientConnected || !GeneralConfig.Get("RSBot.showExitDialog", true))
         {
             GlobalConfig.Save();
             PlayerConfig.Save();
@@ -567,7 +568,7 @@ public partial class Main : UIWindow
     /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
     private void menuItemExit_Click(object sender, EventArgs e)
     {
-        if (Kernel.Proxy == null || !Kernel.Proxy.ClientConnected || !GlobalConfig.Get("RSBot.showExitDialog", true))
+        if (Kernel.Proxy == null || !Kernel.Proxy.ClientConnected || !GeneralConfig.Get("RSBot.showExitDialog", true))
         {
             GlobalConfig.Save();
             PlayerConfig.Save();
@@ -633,7 +634,8 @@ public partial class Main : UIWindow
     /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
     private void darkToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        GlobalConfig.Set("RSBot.Theme.Auto", false);
+        GeneralConfig.Set("RSBot.Theme.Auto", false);
+        GeneralConfig.Save();
         SetThemeColor(DarkThemeColor);
     }
 
@@ -644,7 +646,8 @@ public partial class Main : UIWindow
     /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
     private void lightToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        GlobalConfig.Set("RSBot.Theme.Auto", false);
+        GeneralConfig.Set("RSBot.Theme.Auto", false);
+        GeneralConfig.Save();
         SetThemeColor(LightThemeColor);
     }
 
@@ -657,7 +660,8 @@ public partial class Main : UIWindow
     {
         if (WindowsHelper.IsModern)
         {
-            GlobalConfig.Set("RSBot.Theme.Auto", true);
+            GeneralConfig.Set("RSBot.Theme.Auto", true);
+            GeneralConfig.Save();
             SystemEvents_UserPreferenceChanged(null, new UserPreferenceChangedEventArgs(UserPreferenceCategory.Color));
 
             return;
@@ -720,6 +724,7 @@ public partial class Main : UIWindow
                 Application.Restart();
 
         ProfileManager.SetSelectedProfile(dialog.SelectedProfile);
+        GeneralConfig.Load();
         GlobalConfig.Load();
 
         EventManager.FireEvent("OnProfileChanged");
