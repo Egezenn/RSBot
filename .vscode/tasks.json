@@ -3,7 +3,7 @@
   "tasks": [
     {
       "label": "Build (Debug)",
-      "detail": "Build RSBot in Debug configuration",
+      "detail": "Build OasisBot in Debug configuration",
       "icon": { "id": "beaker", "color": "terminal.ansiGreen" },
       "type": "shell",
       "command": "powershell",
@@ -22,7 +22,7 @@
     },
     {
       "label": "Build (Release)",
-      "detail": "Build RSBot in Release configuration",
+      "detail": "Build OasisBot in Release configuration",
       "icon": { "id": "package", "color": "terminal.ansiYellow" },
       "type": "shell",
       "command": "powershell",
@@ -41,7 +41,7 @@
     },
     {
       "label": "Build & Run",
-      "detail": "Build and start RSBot",
+      "detail": "Build and start OasisBot",
       "icon": { "id": "play", "color": "terminal.ansiGreen" },
       "type": "shell",
       "command": "powershell",
@@ -72,11 +72,11 @@
       "presentation": { "reveal": "always", "panel": "new" }
     },
     {
-      "label": "Launch RSBot",
-      "detail": "Run the already built RSBot.exe",
+      "label": "Launch OasisBot",
+      "detail": "Run the already built OasisBot.exe",
       "icon": { "id": "rocket", "color": "terminal.ansiCyan" },
       "type": "shell",
-      "command": ".\\Build\\RSBot.exe",
+      "command": ".\\Build\\OasisBot.exe",
       "group": "test",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
@@ -85,7 +85,7 @@
       "detail": "Run the latest generated installer",
       "icon": { "id": "play", "color": "terminal.ansiMagenta" },
       "type": "shell",
-      "command": "Get-ChildItem 'RSBot-Setup-*.exe' | Sort-Object LastWriteTime -Descending | Select-Object -First 1 | ForEach-Object { Invoke-Item $_.FullName }",
+      "command": "Get-ChildItem 'OasisBot-Setup-*.exe' | Sort-Object LastWriteTime -Descending | Select-Object -First 1 | ForEach-Object { Invoke-Item $_.FullName }",
       "group": { "kind": "test" }
     },
     {
@@ -93,7 +93,7 @@
       "detail": "Compile the Inno Setup installer",
       "icon": { "id": "tools", "color": "terminal.ansiMagenta" },
       "type": "shell",
-      "command": "& 'C:\\Users\\ez\\AppData\\Local\\Programs\\Inno Setup 6\\ISCC.exe' scripts\\RSBot.iss",
+      "command": "& 'C:\\Users\\ez\\AppData\\Local\\Programs\\Inno Setup 6\\ISCC.exe' scripts\\OasisBot.iss",
       "group": "build"
     }
   ]

@@ -59,9 +59,9 @@ UI is handled by the submodule `.\SDUI`. If you encounter any issues where it do
 
 ### Build structure
 
-| Name        | Directory           | Description                                                         |
-| ----------- | ------------------- | ------------------------------------------------------------------- |
-| `RSBot.exe` | `.\Build\RSBot.exe` | Main application executable                                         |
-| `Data`      | `.\Build\Data`      | Where dependencies, botbases, plugins, townscripts etc. goes        |
-| `User`      | `.\Build\User`      | Autologin info, user configs and available profiles                 |
-| `Logs`      | `.\Build\User\Logs` | Logs for each character and environment stored in a ISO dated file. |
+| Name           | Directory              | Description                                                         |
+| -------------- | ---------------------- | ------------------------------------------------------------------- |
+| `OasisBot.exe` | `.\Build\OasisBot.exe` | Main application executable                                         |
+| `Data`         | `.\Build\Data`         | Where dependencies, botbases, plugins, townscripts etc. goes        |
+| `User`         | `.\Build\User`         | Autologin info, user configs and available profiles                 |
+| `Logs`         | `.\Build\User\Logs`    | Logs for each character and environment stored in a ISO dated file. |

@@ -1,25 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <OutputPath>.\..\..\Build\Data\Plugins</OutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Description>A open source bot for Silkroad Online</Description>
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>disable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<OutputPath>.\..\..\Build\Data\Plugins</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<Description>A open source bot for Silkroad Online</Description>
     <Copyright>Copyright © 2026 Silkroad Developer Community</Copyright>
-    <PackageProjectUrl>https://github.com/Silkroad-Developer-Community/RSBot</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Silkroad-Developer-Community/RSBot</RepositoryUrl>
-    <OutputType>Library</OutputType>
-    <PythonVersion>3.13.11</PythonVersion>
-    <PythonRuntimeDir>$(OutputPath)\..\Python\PyRuntime\</PythonRuntimeDir>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Components\API\Core\Chat\**" />
-    <EmbeddedResource Remove="Components\API\Core\Chat\**" />
-    <None Remove="Components\API\Core\Chat\**" />
-  </ItemGroup>
+		<PackageProjectUrl>https://github.com/Silkroad-Developer-Community/OasisBot</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Silkroad-Developer-Community/OasisBot</RepositoryUrl>
+		<OutputType>Library</OutputType>
+		<PythonVersion>3.13.11</PythonVersion>
+		<PythonRuntimeDir>$(OutputPath)\..\Python\PyRuntime\</PythonRuntimeDir>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="pythonnet" Version="3.0.5" />

@@ -7,7 +7,7 @@ PORT = 8000
 DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def find_latest_installer():
-    files = [f for f in os.listdir(DIRECTORY) if f.startswith("RSBot-Setup-") and f.endswith(".exe")]
+    files = [f for f in os.listdir(DIRECTORY) if f.startswith("OasisBot-Setup-") and f.endswith(".exe")]
     if not files:
         return None
     # Sort by modification time to get the latest
@@ -23,7 +23,7 @@ def get_mock_json():
             "prerelease": True,
             "assets": [
                 {
-                    "name": f"RSBot-Setup-{version}.exe",
+                    "name": f"OasisBot-Setup-{version}.exe",
                     "browser_download_url": f"http://localhost:{PORT}/{installer}",
                 }
             ],
@@ -45,8 +45,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return super().do_GET()
 
 if __name__ == "__main__":
-    if not any(f.startswith("RSBot-Setup-") for f in os.listdir(DIRECTORY)):
-        dummy_exe = os.path.join(DIRECTORY, "RSBot-Setup-99.99.99.exe")
+    if not any(f.startswith("OasisBot-Setup-") for f in os.listdir(DIRECTORY)):
+        dummy_exe = os.path.join(DIRECTORY, "OasisBot-Setup-99.99.99.exe")
         if not os.path.exists(dummy_exe):
             with open(dummy_exe, "wb") as f:
                 f.write(b"This is a dummy installer for testing purposes.")

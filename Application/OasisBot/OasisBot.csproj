@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>RSBot</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -10,6 +11,10 @@
     <Copyright>Copyright © 2018-2026 RSBot Team; 2026 Silkroad Developer Community</Copyright>
     <PackageProjectUrl>https://github.com/Silkroad-Developer-Community/RSBot</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Silkroad-Developer-Community/RSBot</RepositoryUrl>
+    <AssemblyName>OasisBot</AssemblyName>
+    <Title>OasisBot</Title>
+    <Product>OasisBot</Product>
+    <Company>Silkroad Developer Community</Company>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <InformationalVersion>2.10.0</InformationalVersion>
@@ -42,3 +47,4 @@
     <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="..\..\Build\Data\%(RecursiveDir)" />
   </Target>
 </Project>
+
