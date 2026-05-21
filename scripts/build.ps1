@@ -10,12 +10,12 @@ param(
     [switch]$DoNotStart
 )
 
-if (-not (Test-Path ".\SDUI")) {
-    Write-Output "SDUI submodule is missing. Initializing and updating submodules..."
+if (-not (Test-Path ".\SDUI\SDUI\SDUI.csproj")) {
+    Write-Output "SDUI submodule is missing or incomplete. Initializing and updating submodules..."
     git submodule update --init --recursive
 }
 
-taskkill /F /IM RSBot.exe
+taskkill /F /IM OasisBot.exe
 taskkill /F /IM sro_client.exe
 
 if ($Clean) {
@@ -60,8 +60,8 @@ if ($buildExitCode -eq 0) {
     }
 
     if (!$DoNotStart) {
-        Write-Output "Starting RSBot..."
-        & ".\Build\RSBot.exe"
+        Write-Output "Starting OasisBot..."
+        & ".\Build\OasisBot.exe"
     }
 }
 else {

@@ -47,7 +47,12 @@ public partial class Main : UIWindow
         SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
         RegisterEvents();
 
-        Text = "RSBot";
+        Text = Program.AssemblyTitle;
+        Icon = Properties.Resources.app_icon;
+        notifyIcon.Text = Program.AssemblyTitle;
+        notifyIcon.BalloonTipTitle = Program.AssemblyTitle;
+        notifyIcon.Icon = Properties.Resources.tray;
+
         Shown += Main_Shown;
     }
 
@@ -64,7 +69,7 @@ public partial class Main : UIWindow
     // TODO
     private void donateButton_Click(object sender, EventArgs e)
     {
-        Process.Start(new ProcessStartInfo { FileName = "https://github.com/Silkroad-Developer-Community/RSBot", UseShellExecute = true });
+        Process.Start(new ProcessStartInfo { FileName = "https://github.com/Silkroad-Developer-Community/OasisBot", UseShellExecute = true });
     }
 
     /// <summary>
@@ -873,7 +878,7 @@ public partial class Main : UIWindow
         var disconnectedText = LanguageManager.GetLang("Disconnected");
         if (!Text.EndsWith(disconnectedText))
         {
-            Text = $@"RSBot - {_playerName} - {disconnectedText}";
+            Text = $@"OasisBot - {_playerName} - {disconnectedText}";
             notifyIcon.Text = Text;
         }
     }
@@ -930,7 +935,7 @@ public partial class Main : UIWindow
             item.Enabled = true;
 
         _playerName = Game.Player.Name;
-        Text = $@"RSBot - {_playerName}";
+        Text = $@"OasisBot - {_playerName}";
         notifyIcon.Text = Text;
 
         if (Game.Clientless)
@@ -955,3 +960,4 @@ public partial class Main : UIWindow
 
     
 }
+
