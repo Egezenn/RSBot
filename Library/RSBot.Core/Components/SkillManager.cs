@@ -631,24 +631,42 @@ public static class SkillManager
     ///     Cancels the action.
     /// </summary>
     /// <returns></returns>
-    public static bool CancelAction()
+    public static bool CancelAction(int timeout = 500)
     {
-        var packet = new Packet(0x7074);
-        packet.WriteByte(0x02); //Cancel
+        if (timeout <= 0)
+        {
+            PacketManager.SendPacket(CreateCancelActionPacket(), PacketDestination.Server);
+            return true;
+        }
 
         var callback = new AwaitCallback(
             response =>
             {
-                return response.ReadByte() == 0x02 && response.ReadByte() == 0x00
-                    ? AwaitCallbackResult.Success
-                    : AwaitCallbackResult.ConditionFailed;
+                var state = response.ReadByte();
+                var recurring = response.ReadByte();
+
+                if (state == 0x02 && recurring == 0x00)
+                    return AwaitCallbackResult.Success;
+
+                if (state == 0x02)
+                    return AwaitCallbackResult.Fail;
+
+                return AwaitCallbackResult.ConditionFailed;
             },
             0xB074
         );
 
-        PacketManager.SendPacket(packet, PacketDestination.Server, callback);
-        callback.AwaitResponse();
+        PacketManager.SendPacket(CreateCancelActionPacket(), PacketDestination.Server, callback);
+        callback.AwaitResponse(timeout);
 
         return callback.IsCompleted;
+    }
+
+    private static Packet CreateCancelActionPacket()
+    {
+        var packet = new Packet(0x7074);
+        packet.WriteByte(0x02); //Cancel
+
+        return packet;
     }
 }

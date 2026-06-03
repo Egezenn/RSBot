@@ -58,10 +58,7 @@ public class Client() : NetBase(isClient: true)
     {
         try
         {
-            EnablePacketDispatcher = false;
-            IsClosing = true;
-
-            _dispatcherThread?.Join();
+            StopNetWorker();
 
             //Close Socket
             if (_socket != null)
@@ -81,7 +78,6 @@ public class Client() : NetBase(isClient: true)
             }
 
             _protocol = null;
-            _dispatcherThread = null;
         }
         catch { }
     }
@@ -97,12 +93,12 @@ public class Client() : NetBase(isClient: true)
             if (IsClosing)
                 return;
 
-            EnablePacketDispatcher = true;
             _socket = _listener.EndAccept(ar);
 
             _protocol = new SecurityProtocol();
             _protocol.GenerateSecurity(true, true, true);
 
+            EnablePacketDispatcher = true;
             _socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, OnBeginReceiveCallback, null);
 
             OnConnected();
@@ -136,6 +132,7 @@ public class Client() : NetBase(isClient: true)
             }
 
             _protocol.Recv(_buffer, 0, receivedSize);
+            SignalPacketDispatcher();
         }
         catch (SocketException se)
         {
