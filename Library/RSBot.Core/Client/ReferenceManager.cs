@@ -98,6 +98,7 @@ public class ReferenceManager
         worker.ReportProgress(100, "Done");
         EventManager.FireEvent("OnLoadGameData");
     }
+
     public void Load()
     {
         var sw = Stopwatch.StartNew();

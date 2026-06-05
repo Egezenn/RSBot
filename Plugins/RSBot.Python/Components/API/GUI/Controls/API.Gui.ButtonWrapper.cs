@@ -29,6 +29,5 @@ namespace RSBot.Python.Components.API.GUI.Controls
                 }
             };
         }
-        
     }
 }

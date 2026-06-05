@@ -72,7 +72,10 @@ internal class AutoPartyBundle
             AcceptIfBotIsStopped = PlayerConfig.Get<bool>("RSBot.Party.AcceptIfBotStopped"),
             LeaveIfMasterNot = PlayerConfig.Get<bool>("RSBot.Party.LeaveIfMasterNot"),
             LeaveIfMasterNotName = PlayerConfig.Get<string>("RSBot.Party.LeaveIfMasterNotName"),
-            CenterPosition = (Kernel.Bot?.Botbase != null) ? Kernel.Bot.Botbase.Area.Position : (Game.Player?.Position ?? new RSBot.Core.Objects.Position(0, 0, 0)),
+            CenterPosition =
+                (Kernel.Bot?.Botbase != null)
+                    ? Kernel.Bot.Botbase.Area.Position
+                    : (Game.Player?.Position ?? new RSBot.Core.Objects.Position(0, 0, 0)),
             AutoJoinByName = PlayerConfig.Get("RSBot.Party.AutoJoin.ByName", false),
             AutoJoinByTitle = PlayerConfig.Get("RSBot.Party.AutoJoin.ByTitle", false),
             AutoJoinByNameContent = PlayerConfig.Get("RSBot.Party.AutoJoin.Name", string.Empty),

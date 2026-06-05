@@ -1,5 +1,5 @@
-using RSBot.Core.Components.Command;
 using System;
+using RSBot.Core.Components.Command;
 
 namespace RSBot.Core.Components.Command;
 

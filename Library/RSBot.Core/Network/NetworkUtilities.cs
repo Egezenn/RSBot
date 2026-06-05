@@ -25,7 +25,7 @@ internal class NetworkUtilities
                 using var listener = new TcpListener(IPAddress.Loopback, port);
                 listener.Start();
                 listener.Stop();
-                return port;   // Successfully bound → free
+                return port; // Successfully bound → free
             }
             catch (SocketException)
             {

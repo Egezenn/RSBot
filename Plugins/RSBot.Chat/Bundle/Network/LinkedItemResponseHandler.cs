@@ -1,7 +1,7 @@
-﻿using RSBot.Core;
+﻿using System.Collections.Generic;
+using RSBot.Core;
 using RSBot.Core.Client.ReferenceObjects;
 using RSBot.Core.Network;
-using System.Collections.Generic;
 
 namespace RSBot.Chat.Bundle.Network
 {

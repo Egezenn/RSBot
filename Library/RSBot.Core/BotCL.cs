@@ -31,6 +31,7 @@ namespace RSBot.Core
 
             LoadExtensions();
         }
+
         public static void LoadExtensions()
         {
             foreach (var plugin in Kernel.PluginManager.Extensions.Values)

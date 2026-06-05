@@ -13,7 +13,6 @@ public interface IBotbase
     /// </value>
     public string Name { get; }
 
-
     /// <summary>
     ///     Gets the area.
     /// </summary>

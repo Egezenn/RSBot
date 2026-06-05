@@ -1,7 +1,7 @@
-﻿using RSBot.Core;
+﻿using System.Windows.Forms;
+using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Plugins;
-using System.Windows.Forms;
 
 namespace RSBot.Trade
 {
@@ -11,6 +11,7 @@ namespace RSBot.Trade
         public string DisplayName => "Trade";
         public string TabText => DisplayName;
         public Control View => Views.View.Main;
+
         public void Translate()
         {
             LanguageManager.Translate(View, Kernel.Language);

@@ -29,7 +29,9 @@ namespace RSBot.Core.Network.Handler.Agent.Party
                     //ITEM_EU_
                     //ITEM_AVATAR_
                     byte optLevel = packet.ReadByte();
-                    Log.Notify($"Item [{item.GetRealName() ?? itemId.ToString()} (+{optLevel})] is distributed to [{member.Name}].");
+                    Log.Notify(
+                        $"Item [{item.GetRealName() ?? itemId.ToString()} (+{optLevel})] is distributed to [{member.Name}]."
+                    );
                 }
                 else if (item.TypeID2 == 2)
                 {
@@ -40,7 +42,9 @@ namespace RSBot.Core.Network.Handler.Agent.Party
                 {
                     //ITEM_ETC_
                     ushort quantity = packet.ReadUShort();
-                    Log.Notify($"Item [{item.GetRealName() ?? itemId.ToString()} {quantity} pieces] is distributed to [{member.Name}].");
+                    Log.Notify(
+                        $"Item [{item.GetRealName() ?? itemId.ToString()} {quantity} pieces] is distributed to [{member.Name}]."
+                    );
                 }
             }
         }

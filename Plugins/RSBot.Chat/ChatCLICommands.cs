@@ -1,7 +1,7 @@
+using System;
 using RSBot.Core;
 using RSBot.Core.Components.Command;
 using RSBot.Core.Objects;
-using System;
 
 namespace RSBot.Chat;
 

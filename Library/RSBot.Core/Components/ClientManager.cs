@@ -31,10 +31,7 @@ public class ClientManager
     public static async Task<bool> Start()
     {
         var silkroadDirectory = GlobalConfig.Get<string>("RSBot.SilkroadDirectory");
-        var path = Path.Combine(
-            silkroadDirectory,
-            GlobalConfig.Get<string>("RSBot.SilkroadExecutable")
-        );
+        var path = Path.Combine(silkroadDirectory, GlobalConfig.Get<string>("RSBot.SilkroadExecutable"));
 
         string libraryDllName = "Client.Library.dll";
         string fullPath = Path.Combine(Kernel.BasePath, libraryDllName);
@@ -51,13 +48,13 @@ public class ClientManager
         var si = new STARTUPINFO();
 
         bool specialClient =
-            Game.ClientType == GameClientType.RuSro ||
-            Game.ClientType == GameClientType.Global ||
-            Game.ClientType == GameClientType.Korean ||
-            Game.ClientType == GameClientType.VTC_Game ||
-            Game.ClientType == GameClientType.Turkey ||
-            Game.ClientType == GameClientType.Taiwan ||
-            Game.ClientType == GameClientType.Japanese;
+            Game.ClientType == GameClientType.RuSro
+            || Game.ClientType == GameClientType.Global
+            || Game.ClientType == GameClientType.Korean
+            || Game.ClientType == GameClientType.VTC_Game
+            || Game.ClientType == GameClientType.Turkey
+            || Game.ClientType == GameClientType.Taiwan
+            || Game.ClientType == GameClientType.Japanese;
 
         if (Game.ClientType == GameClientType.RuSro)
         {
@@ -66,18 +63,20 @@ public class ClientManager
             args = $"-LOGIN:{login} -PASSWORD:{password}";
         }
 
-        if (!CreateProcess(
-            null,
-            $"\"{path}\" {args}",
-            IntPtr.Zero,
-            IntPtr.Zero,
-            false,
-            CREATE_SUSPENDED,
-            IntPtr.Zero,
-            silkroadDirectory,
-            ref si,
-            out var pi
-        ))
+        if (
+            !CreateProcess(
+                null,
+                $"\"{path}\" {args}",
+                IntPtr.Zero,
+                IntPtr.Zero,
+                false,
+                CREATE_SUSPENDED,
+                IntPtr.Zero,
+                silkroadDirectory,
+                ref si,
+                out var pi
+            )
+        )
             return false;
 
         PrepareTempConfigFile(pi.dwProcessId, divisionIndex);
@@ -104,9 +103,9 @@ public class ClientManager
             SuspendThread(pi.hThread);
 
             if (
-                Game.ClientType == GameClientType.VTC_Game ||
-                Game.ClientType == GameClientType.Turkey ||
-                Game.ClientType == GameClientType.Taiwan
+                Game.ClientType == GameClientType.VTC_Game
+                || Game.ClientType == GameClientType.Turkey
+                || Game.ClientType == GameClientType.Taiwan
             )
             {
                 ApplyXigncodePatch(sroProcess, pi);
@@ -132,13 +131,7 @@ public class ClientManager
             if (loadLibAddr == IntPtr.Zero)
                 return false;
 
-            IntPtr remotePath = VirtualAllocEx(
-                handle,
-                IntPtr.Zero,
-                pathLen,
-                MEM_COMMIT | MEM_RESERVE,
-                PAGE_READWRITE
-            );
+            IntPtr remotePath = VirtualAllocEx(handle, IntPtr.Zero, pathLen, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 
             if (remotePath == IntPtr.Zero)
                 return false;
@@ -146,15 +139,7 @@ public class ClientManager
             if (!WriteProcessMemory(handle, remotePath, buffer, pathLen, out _))
                 return false;
 
-            IntPtr remoteThread = CreateRemoteThread(
-                handle,
-                IntPtr.Zero,
-                0,
-                loadLibAddr,
-                remotePath,
-                0,
-                IntPtr.Zero
-            );
+            IntPtr remoteThread = CreateRemoteThread(handle, IntPtr.Zero, 0, loadLibAddr, remotePath, 0, IntPtr.Zero);
 
             if (remoteThread == IntPtr.Zero)
                 return false;
@@ -202,7 +187,8 @@ public class ClientManager
         var patchNop2 = new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90 };
         var patchJmp = new byte[] { 0xEB };
 
-        string signature = "55 8B EC 83 EC ?? 8B 45 ?? 50 E8 ?? ?? ?? ?? 83 C4 04 89 45 ?? 8B 4D ?? 89 4D ?? 68 ?? ?? ?? ?? 6A 00 6A 00";
+        string signature =
+            "55 8B EC 83 EC ?? 8B 45 ?? 50 E8 ?? ?? ?? ?? 83 C4 04 89 45 ?? 8B 4D ?? 89 4D ?? 68 ?? ?? ?? ?? 6A 00 6A 00";
 
         int baseAddress = process.MainModule.BaseAddress.ToInt32();
         var address = FindPattern(signature, moduleMemory, baseAddress);
@@ -258,10 +244,12 @@ public class ClientManager
         var callTargetCounts = new System.Collections.Generic.Dictionary<int, int>();
         for (int i = sysEnterOffset; i < searchEnd; i++)
         {
-            if (moduleMemory[i] == 0xE8 &&
-                moduleMemory[i + 5] == 0x83 &&
-                moduleMemory[i + 6] == 0xC4 &&
-                moduleMemory[i + 7] == 0x0C)
+            if (
+                moduleMemory[i] == 0xE8
+                && moduleMemory[i + 5] == 0x83
+                && moduleMemory[i + 6] == 0xC4
+                && moduleMemory[i + 7] == 0x0C
+            )
             {
                 int rel = BitConverter.ToInt32(moduleMemory, i + 1);
                 int targetOffset = i + 5 + rel;
@@ -323,12 +311,17 @@ public class ClientManager
 
             for (int ci = 0; ci <= memory.Length - 18; ci++)
             {
-                if (memory[ci] == 0x6A && memory[ci + 1] == 0x00 &&
-                    memory[ci + 2] == 0x68 &&
-                    memory[ci + 3] == vaBytes[0] && memory[ci + 4] == vaBytes[1] &&
-                    memory[ci + 5] == vaBytes[2] && memory[ci + 6] == vaBytes[3] &&
-                    memory[ci + 7] == 0x68 &&
-                    memory[ci + 12] == 0xE8)
+                if (
+                    memory[ci] == 0x6A
+                    && memory[ci + 1] == 0x00
+                    && memory[ci + 2] == 0x68
+                    && memory[ci + 3] == vaBytes[0]
+                    && memory[ci + 4] == vaBytes[1]
+                    && memory[ci + 5] == vaBytes[2]
+                    && memory[ci + 6] == vaBytes[3]
+                    && memory[ci + 7] == 0x68
+                    && memory[ci + 12] == 0xE8
+                )
                 {
                     return ci;
                 }
@@ -434,7 +427,8 @@ public class ClientManager
     /// <returns></returns>
     private static IntPtr FindPattern(string stringPattern, byte[] buffer, int baseAddress)
     {
-        var pattern = stringPattern.Split(' ')
+        var pattern = stringPattern
+            .Split(' ')
             .Select(p => p == "??" || p == "?" ? -1 : int.Parse(p, NumberStyles.AllowHexSpecifier))
             .ToArray();
 

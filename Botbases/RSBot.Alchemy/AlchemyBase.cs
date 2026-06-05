@@ -22,6 +22,7 @@ public class AlchemyBase : IBotbase
 
         Log.AppendFormat(LogLevel.Debug, "[Alchemy] Starting automated alchemy...");
     }
+
     public void Stop()
     {
         if (Globals.Botbase != null)
@@ -29,17 +30,20 @@ public class AlchemyBase : IBotbase
 
         Log.AppendFormat(LogLevel.Debug, "[Alchemy] Stopped automated alchemy");
     }
+
     public void Register()
     {
         Initialize();
 
         Log.Debug("[Alchemy] Botbase registered to the kernel!");
     }
+
     public void Tick()
     {
         if (!Globals.View.IsRefreshing && !AlchemyManager.IsFusing)
             Globals.Botbase.Tick();
     }
+
     public void Initialize()
     {
         AlchemyEventsSubscriber.Subscribe();

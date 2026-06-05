@@ -15,7 +15,6 @@ namespace RSBot.Python.Components.API.GUI.Controls
             _callback = callback;
             if (_callback != null)
             {
-
                 cb.SelectedIndexChanged += (sender, args) =>
                 {
                     using (Py.GIL())
@@ -47,18 +46,22 @@ namespace RSBot.Python.Components.API.GUI.Controls
         {
             Invoke(() => ((ComboBox)Control).SelectedIndex = index);
         }
+
         private void RemoveItem(int index)
         {
             Invoke(() => ((ComboBox)Control).Items.RemoveAt(index));
         }
+
         private int GetItemCount()
         {
             return ((ComboBox)Control).Items.Count;
         }
+
         private string GetItem(int index)
         {
             return ((ComboBox)Control).Items[index].ToString();
         }
+
         private string GetSelectedItem()
         {
             return ((ComboBox)Control).SelectedItem.ToString();
@@ -68,26 +71,32 @@ namespace RSBot.Python.Components.API.GUI.Controls
         {
             AddItem(text);
         }
+
         public int selected_index()
         {
             return GetIndex();
         }
+
         public void set_index(int index)
         {
             SetIndex(index);
         }
+
         public void remove_item(int index)
         {
             RemoveItem(index);
         }
+
         public int item_count()
         {
             return GetItemCount();
         }
+
         public string get_item(int index)
         {
             return GetItem(index);
         }
+
         public string get_selected_item()
         {
             return GetSelectedItem();

@@ -1,14 +1,14 @@
-﻿using RSBot.Core.Client.ReferenceObjects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Xml;
+using RSBot.Core.Client.ReferenceObjects;
 using RSBot.Core.Network;
 using RSBot.Core.Objects;
 using RSBot.Core.Objects.Cos;
 using RSBot.Core.Objects.Inventory;
 using RSBot.Core.Objects.Spawn;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Xml;
 using static RSBot.Core.Game;
 
 namespace RSBot.Core.Components;
@@ -433,13 +433,15 @@ public static class ShoppingManager
     public static void StoreItems(string npcCodeName)
     {
         int firstSlot = 13;
-        if (Game.ClientType == GameClientType.Global
+        if (
+            Game.ClientType == GameClientType.Global
             || Game.ClientType == GameClientType.Korean
             || Game.ClientType == GameClientType.VTC_Game
             || Game.ClientType == GameClientType.RuSro
             || Game.ClientType == GameClientType.Turkey
             || Game.ClientType == GameClientType.Taiwan
-            || Game.ClientType == GameClientType.Japanese)
+            || Game.ClientType == GameClientType.Japanese
+        )
             firstSlot = 17; //4 slots for relics
 
         var tempInventory = Game.Player.Inventory.GetItems(item =>
@@ -520,7 +522,7 @@ public static class ShoppingManager
             Game.Player.GuildStorage.Sort(npc);
             allStorageItems = Game.Player.GuildStorage.GetItems(item => true);
         }
-        
+
         if (allStorageItems == null || allStorageItems.Count == 0)
         {
             if (!npc.Record.CodeName.Contains("WAREHOUSE"))
@@ -542,17 +544,17 @@ public static class ShoppingManager
             // Get remaining items at or after slot i, ordered by grouping key
             List<InventoryItem> remaining = null;
             if (npc.Record.CodeName.Contains("WAREHOUSE"))
-            { 
-                remaining = Game.Player.Storage
-                    .GetItems(it => it.Slot >= i)
+            {
+                remaining = Game
+                    .Player.Storage.GetItems(it => it.Slot >= i)
                     .OrderBy(it => it.ItemId)
                     .ThenBy(it => it.Slot)
                     .ToList();
             }
             else
             {
-                remaining = Game.Player.GuildStorage
-                    .GetItems(it => it.Slot >= i)
+                remaining = Game
+                    .Player.GuildStorage.GetItems(it => it.Slot >= i)
                     .OrderBy(it => it.ItemId)
                     .ThenBy(it => it.Slot)
                     .ToList();
@@ -600,7 +602,6 @@ public static class ShoppingManager
                     Thread.Sleep(500);
                 }
             }
-
         }
 
         if (!npc.Record.CodeName.Contains("WAREHOUSE"))

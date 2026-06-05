@@ -7,7 +7,12 @@ namespace RSBot.Chat
     public class ChatManager
     {
         string lastWhisper;
-        public ChatManager() { SubscribeEvents(); }
+
+        public ChatManager()
+        {
+            SubscribeEvents();
+        }
+
         public static void Send(ChatType type, string message, string receiver = null)
         {
             if (type == ChatType.Global)
@@ -18,10 +23,12 @@ namespace RSBot.Chat
             if (type == ChatType.Private)
                 PlayerConfig.Set("RSBot.Chat.LastWhisper", receiver);
         }
+
         private void SubscribeEvents()
         {
             EventManager.SubscribeEvent("OnEnterGame", OnEnterGame);
         }
+
         private void OnEnterGame()
         {
             lastWhisper = PlayerConfig.Get<string>("RSBot.Chat.LastWhisper");

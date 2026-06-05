@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using RSBot.Core;
+using RSBot.Core.Components;
 using RSBot.Core.Event;
 using RSBot.Core.Objects;
 using RSBot.Core.Objects.Party;
-using RSBot.Core.Components;
 using RSBot.Core.Objects.Spawn;
 
 namespace RSBot.Training.Bundle.PartyBuffing;
@@ -43,8 +43,8 @@ internal class PartyBuffingBundle : IBundle
 
         var selectedGroup = PlayerConfig.Get("RSBot.Party.Buffing.SelectedGroup", "Default");
 
-        SpawnManager.TryGetEntities<SpawnedPlayer>(p =>
-            BuffingPartyMembers.Any(s => s.Group == selectedGroup && s.Name == p.Name),
+        SpawnManager.TryGetEntities<SpawnedPlayer>(
+            p => BuffingPartyMembers.Any(s => s.Group == selectedGroup && s.Name == p.Name),
             out var members
         );
 
@@ -72,9 +72,11 @@ internal class PartyBuffingBundle : IBundle
                 if (skill == null || skill.HasCooldown)
                     continue;
 
-                if (!skill.Record.TargetGroup_Ally &&
-                    skill.Record.TargetGroup_Party &&
-                    !(Game.Party?.Members?.Any(p => p.Name == member.Name) ?? false))
+                if (
+                    !skill.Record.TargetGroup_Ally
+                    && skill.Record.TargetGroup_Party
+                    && !(Game.Party?.Members?.Any(p => p.Name == member.Name) ?? false)
+                )
                 {
                     continue;
                 }

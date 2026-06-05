@@ -1,6 +1,6 @@
-﻿using RSBot.General.Components;
+﻿using System.Collections.Generic;
+using RSBot.General.Components;
 using RSBot.General.Models;
-using System.Collections.Generic;
 
 namespace RSBot.ServerInfo
 {

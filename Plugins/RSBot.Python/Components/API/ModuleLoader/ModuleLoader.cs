@@ -22,15 +22,14 @@ namespace RSBot.Python.Components.API.ModuleLoader
         {
             var pluginType = typeof(IPythonPlugin);
 
-            var pluginInstances = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())                  
-                .Where(t => pluginType.IsAssignableFrom(t)      
-                            && !t.IsInterface                   
-                            && !t.IsAbstract)
+            var pluginInstances = AppDomain
+                .CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t => pluginType.IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract)
                 .Select(t => (IPythonPlugin)Activator.CreateInstance(t)!);
             foreach (var plugin in pluginInstances)
             {
-                plugin.Init(form);                         
+                plugin.Init(form);
                 _plugins[plugin.ModuleName] = plugin;
                 form.AppendLog($"[Python-API] Plugin loaded: {plugin.ModuleName}");
             }
@@ -51,10 +50,7 @@ namespace RSBot.Python.Components.API.ModuleLoader
         /// </summary>
         public static Dictionary<string, object> GetAll()
         {
-            return _plugins.ToDictionary(
-                x => x.Key,
-                x => (object)x.Value
-            );
+            return _plugins.ToDictionary(x => x.Key, x => (object)x.Value);
         }
     }
 }

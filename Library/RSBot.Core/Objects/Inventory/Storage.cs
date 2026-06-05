@@ -1,7 +1,7 @@
-﻿using RSBot.Core.Network;
-using RSBot.Core.Objects.Spawn;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RSBot.Core.Network;
+using RSBot.Core.Objects.Spawn;
 
 namespace RSBot.Core.Objects.Inventory;
 

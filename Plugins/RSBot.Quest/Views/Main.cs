@@ -1,13 +1,13 @@
-﻿using RSBot.Core;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
+using RSBot.Core;
 using RSBot.Core.Event;
 using RSBot.Core.Objects.Quests;
 using RSBot.Quest.Views.Sidebar;
 using SDUI;
 using SDUI.Controls;
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace RSBot.Quest.Views;
 

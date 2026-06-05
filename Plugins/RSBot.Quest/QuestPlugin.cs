@@ -12,10 +12,12 @@ public class QuestPlugin : IPlugin
     public string InternalName => "RSBot.QuestLog";
     public static QuestPlugin Instance { get; private set; }
     public QuestManager Manager { get; private set; }
+
     public void Initialize()
     {
         Instance = this;
         Manager = new QuestManager();
     }
+
     public void OnLoadCharacter() { }
 }

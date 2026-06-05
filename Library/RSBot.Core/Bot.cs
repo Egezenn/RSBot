@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
-using System;
 using RSBot.Core.Components;
 using RSBot.Core.Event;
 using RSBot.Core.Plugins;
@@ -44,11 +44,13 @@ public class Bot
 
         EventManager.FireEvent("OnSetBotbase", botBase);
     }
+
     public void SetBotbaseView(IBotbaseView botBaseView)
     {
         BotbaseView = botBaseView;
         EventManager.FireEvent("OnSetBotbaseView", botBaseView);
     }
+
     /// <summary>
     ///     Starts this instance.
     /// </summary>

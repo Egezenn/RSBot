@@ -1,11 +1,11 @@
-﻿using Python.Runtime;
+﻿using System.Collections.Generic;
+using Python.Runtime;
 using RSBot.Core;
 using RSBot.Core.Client.ReferenceObjects;
 using RSBot.Core.Extensions;
 using RSBot.Core.Objects;
 using RSBot.Python.Components.API.Interface;
 using RSBot.Python.Views;
-using System.Collections.Generic;
 using static System.Windows.Forms.Design.AxImporter;
 
 namespace RSBot.Python.Components.API.Core.Inventory
@@ -27,7 +27,7 @@ namespace RSBot.Python.Components.API.Core.Inventory
         {
             _main = main;
         }
-        
+
         private PyList BuildItemList(IEnumerable<InventoryItem> items)
         {
             var list = new PyList();
@@ -55,13 +55,12 @@ namespace RSBot.Python.Components.API.Core.Inventory
                         var option = Game.ReferenceManager.GetMagicOption(magicOption.Id);
 
                         if (option != null)
-                            pyOptions.Append(new PyString(GetFusingTranslation(option,magicOption.Value)));
+                            pyOptions.Append(new PyString(GetFusingTranslation(option, magicOption.Value)));
                     }
                     pyItem.SetItem(new PyString("magic_options"), new PyList(pyOptions));
-
                 }
                 if (item.Attributes != 0)
-                {                    
+                {
                     var availableAttributes = ItemAttributesInfo.GetAvailableAttributeGroupsForItem(item.Record);
 
                     if (availableAttributes != null)
@@ -76,7 +75,6 @@ namespace RSBot.Python.Components.API.Core.Inventory
                         }
                         pyItem.SetItem(new PyString("attributes"), new PyList(pyAttributes));
                     }
-
                 }
 
                 list.Append(pyItem);
@@ -84,6 +82,7 @@ namespace RSBot.Python.Components.API.Core.Inventory
 
             return list;
         }
+
         private PyDict GetInventory()
         {
             using (Py.GIL())
@@ -102,7 +101,7 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 var inventorySize = Game.Player.Inventory.Capacity;
                 var gold = Game.Player.Gold;
                 result.SetItem(new PyString("size"), new PyInt(inventorySize));
-                result.SetItem(new PyString("gold"), new PyString(gold.ToString()));                
+                result.SetItem(new PyString("gold"), new PyString(gold.ToString()));
 
                 var itemsEquipped = Game.Player.Inventory.GetEquippedPartItems();
                 var itemsInventory = Game.Player.Inventory.GetNormalPartItems();
@@ -119,6 +118,7 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 return result;
             }
         }
+
         private PyList GetStorage()
         {
             using (Py.GIL())
@@ -133,9 +133,9 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 result = BuildItemList(storage);
 
                 return result;
-
             }
         }
+
         private PyList GetGuildStorage()
         {
             using (Py.GIL())
@@ -150,9 +150,9 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 result = BuildItemList(storage);
 
                 return result;
-
             }
         }
+
         private PyList GetPetStorage()
         {
             using (Py.GIL())
@@ -167,9 +167,9 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 result = BuildItemList(storage);
 
                 return result;
-
             }
         }
+
         private PyDict GetJobPouch()
         {
             using (Py.GIL())
@@ -200,29 +200,34 @@ namespace RSBot.Python.Components.API.Core.Inventory
                 }
                 result.SetItem(new PyString("items"), list);
                 return result;
-
             }
         }
+
         public PyDict get_inventory()
         {
             return GetInventory();
         }
+
         public PyList get_storage()
         {
             return GetStorage();
         }
+
         public PyList get_guild_storage()
         {
             return GetGuildStorage();
         }
+
         public PyDict get_job_pouch()
         {
             return GetJobPouch();
         }
+
         public PyList get_pet_storage()
         {
             return GetPetStorage();
         }
+
         public string GetFusingTranslation(RefMagicOpt magicOption, uint value)
         {
             //TODO: Use and extend GetGroupTranslation instead of hard coding this
@@ -329,5 +334,4 @@ namespace RSBot.Python.Components.API.Core.Inventory
             return magicOption?.Group ?? $"Error. Mag. opt. value: {value}";
         }
     }
-
 }

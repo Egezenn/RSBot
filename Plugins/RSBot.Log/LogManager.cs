@@ -1,6 +1,4 @@
 ﻿namespace RSBot.Log
 {
-    public class LogManager
-    {
-    }
+    public class LogManager { }
 }

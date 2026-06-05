@@ -12,6 +12,7 @@
             return ModuleLoader.GetAll();
         }
     }
+
     public class PythonPluginInfo
     {
         public string FileName { get; set; }
@@ -20,5 +21,4 @@
         public string Author { get; set; }
         public string Version { get; set; }
     }
-
 }

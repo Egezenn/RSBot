@@ -2,10 +2,11 @@
 {
     public class ProtectionManager
     {
-        public ProtectionManager() 
+        public ProtectionManager()
         {
             SubscribeEvents();
         }
+
         /// <summary>
         ///     Subscribes the events.
         /// </summary>

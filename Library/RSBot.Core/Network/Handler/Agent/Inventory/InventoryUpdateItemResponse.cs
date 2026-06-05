@@ -29,15 +29,13 @@ internal class InventoryUpdateItemResponse : IPacketHandler
     /// <param name="packet">The packet.</param>
     public void Invoke(Packet packet)
     {
-        if (Game.ClientType == GameClientType.Global
-            || Game.ClientType == GameClientType.RuSro)
+        if (Game.ClientType == GameClientType.Global || Game.ClientType == GameClientType.RuSro)
             if (packet.ReadByte() != 0) //sometimes appears 9 with unknown structure
-                return; 
+                return;
 
         var sourceSlot = packet.ReadByte();
 
-        if (Game.ClientType == GameClientType.Global
-            || Game.ClientType == GameClientType.RuSro)
+        if (Game.ClientType == GameClientType.Global || Game.ClientType == GameClientType.RuSro)
             packet.ReadByte(); //0 - normal, 2 - item disappearing
 
         var itemUpdateFlag = (ItemUpdateFlag)packet.ReadByte();
@@ -61,10 +59,7 @@ internal class InventoryUpdateItemResponse : IPacketHandler
         if (itemUpdateFlag.HasFlag(ItemUpdateFlag.Durability))
             item.Durability = packet.ReadUInt();
 
-        if (
-            itemUpdateFlag.HasFlag(ItemUpdateFlag.State) ||
-            itemUpdateFlag.HasFlag(ItemUpdateFlag.State2)
-        )
+        if (itemUpdateFlag.HasFlag(ItemUpdateFlag.State) || itemUpdateFlag.HasFlag(ItemUpdateFlag.State2))
             item.State = (InventoryItemState)packet.ReadByte();
 
         if (itemUpdateFlag.HasFlag(ItemUpdateFlag.MagParams))

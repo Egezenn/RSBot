@@ -1,9 +1,9 @@
-﻿using Python.Runtime;
+﻿using System.IO;
+using System.Windows.Forms;
+using Python.Runtime;
 using RSBot.Core;
 using RSBot.Python.Components.API.Interface;
 using RSBot.Python.Views;
-using System.IO;
-using System.Windows.Forms;
 
 namespace RSBot.Python.Components.API.Core.Entity
 {
@@ -30,6 +30,7 @@ namespace RSBot.Python.Components.API.Core.Entity
         {
             return Path.Combine(projectDir, "User");
         }
+
         private string GetConfigPath()
         {
             if (Game.Player == null)
@@ -38,10 +39,12 @@ namespace RSBot.Python.Components.API.Core.Entity
             }
             return Path.Combine(projectDir, "User", "Default", $"{Game.Player.Name}.rs");
         }
+
         private string GetLogDir()
         {
             return Path.Combine(projectDir, "User", "Logs");
         }
+
         private string GetLogPath()
         {
             if (Game.Player == null)
@@ -50,23 +53,25 @@ namespace RSBot.Python.Components.API.Core.Entity
             }
             return Path.Combine(projectDir, "User", "Logs", Game.Player.Name);
         }
+
         public string get_config_dir()
         {
             return GetConfigDir();
         }
+
         public string get_config_path()
         {
             return GetConfigPath();
         }
+
         public string get_log_dir()
         {
             return GetLogDir();
         }
+
         public string get_log_path()
         {
             return GetLogPath();
         }
-
-
     }
 }

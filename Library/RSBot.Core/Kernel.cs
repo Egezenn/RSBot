@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RSBot.Core.Components;
+using RSBot.Core.Components.Command;
 using RSBot.Core.Event;
 using RSBot.Core.Network;
 using RSBot.Core.Plugins;
-using RSBot.Core.Components.Command;
 
 namespace RSBot.Core;
 

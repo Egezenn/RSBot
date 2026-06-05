@@ -1,8 +1,8 @@
+using System;
+using System.Threading.Tasks;
 using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Components.Command;
-using System;
-using System.Threading.Tasks;
 
 namespace RSBot.General;
 

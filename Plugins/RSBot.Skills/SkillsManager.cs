@@ -1,13 +1,13 @@
-﻿using RSBot.Core;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using RSBot.Core;
 using RSBot.Core.Client.ReferenceObjects;
 using RSBot.Core.Components;
 using RSBot.Core.Event;
 using RSBot.Core.Objects;
 using RSBot.Core.Objects.Skill;
 using RSBot.Skills.Components;
-using System;
-using System.Linq;
-using System.Threading;
 
 namespace RSBot.Skills
 {
@@ -20,6 +20,7 @@ namespace RSBot.Skills
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             EventManager.SubscribeEvent("OnLoadCharacter", OnLoadCharacter);
@@ -30,6 +31,7 @@ namespace RSBot.Skills
             EventManager.SubscribeEvent("OnResurrectionRequest", OnResurrectionRequest);
             EventManager.SubscribeEvent("OnExpSpUpdate", OnSpUpdated);
         }
+
         #region Events
         /// <summary>
         ///     Main_s the on load character.
@@ -39,24 +41,28 @@ namespace RSBot.Skills
             ApplyAttackSkills();
             ApplyBuffSkills();
         }
+
         private void OnSkillUpgraded(SkillInfo oldSkill, SkillInfo newSkill)
         {
             Log.NotifyLang("SkillUpgraded", newSkill);
 
             CheckSkillWithdrawnOrUpgraded(oldSkill, newSkill);
         }
+
         private void OnWithdrawSkill(SkillInfo oldSkill, SkillInfo newSkill)
         {
             Log.NotifyLang("SkillWithdrawn", oldSkill);
 
             CheckSkillWithdrawnOrUpgraded(oldSkill, newSkill);
         }
+
         private void OnResurrectionRequest()
         {
             const string key = "RSBot.Skills.";
             if (Game.AcceptanceRequest != null && PlayerConfig.Get<bool>(key + "checkAcceptResurrection"))
                 Game.AcceptanceRequest.Accept();
         }
+
         /// <summary>
         ///     Will be triggered if EXP/SP were gained. Increases the selected mastery level (if available)
         /// </summary>
@@ -76,9 +82,10 @@ namespace RSBot.Skills
             UpdateMastery(mastery.Level, mastery.Record, gap);
         }
         #endregion
-        public void UpdateMastery(byte level, RefSkillMastery record,decimal gap = 0)
+        public void UpdateMastery(byte level, RefSkillMastery record, decimal gap = 0)
         {
-            if (_isUpdatingMastery) return;
+            if (_isUpdatingMastery)
+                return;
             while (level + gap < Game.Player.Level)
             {
                 _isUpdatingMastery = true;
@@ -99,6 +106,7 @@ namespace RSBot.Skills
             }
             _isUpdatingMastery = false;
         }
+
         /// <summary>
         ///     Applies the attack skills.
         /// </summary>
@@ -153,6 +161,7 @@ namespace RSBot.Skills
                 }
             }
         }
+
         /// <summary>
         ///     Applies the buff skills.
         /// </summary>
@@ -175,10 +184,12 @@ namespace RSBot.Skills
                 SkillManager.Buffs.Add(skillInfo);
             }
         }
+
         public static void SaveSkills(string monsterType, uint[] skills)
         {
             PlayerConfig.SetArray(monsterType, skills);
         }
+
         public static void CheckSkillWithdrawnOrUpgraded(SkillInfo oldSkill, SkillInfo newSkill)
         {
             for (var i = 0; i < _numMonsterTypes; i++)
@@ -247,20 +258,24 @@ namespace RSBot.Skills
 
             PlayerConfig.Save();
         }
+
         public static void SetImbueSkill(SkillInfo imbue)
         {
             SkillManager.ImbueSkill = imbue;
             PlayerConfig.Set("RSBot.Skills.Imbue", imbue == null ? 0 : imbue.Id);
         }
+
         public static void SetResurrectionSkill(SkillInfo skill)
         {
             SkillManager.ResurrectionSkill = skill;
             PlayerConfig.Set("RSBot.Skills.ResurrectionSkill", skill == null ? 0 : skill.Id);
         }
+
         public static void SetMasteryToLearn(string mastery)
         {
             PlayerConfig.Set("RSBot.Skills.selectedMastery", mastery);
         }
+
         public static void SetTeleportSkill(uint skillId)
         {
             PlayerConfig.Set("RSBot.Skills.TeleportSkill", skillId);

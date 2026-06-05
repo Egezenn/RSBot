@@ -1,11 +1,11 @@
-﻿using Python.Runtime;
-using RSBot.Python.Components.API.Handler;
-using RSBot.Python.Components.API.ModuleLoader;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Python.Runtime;
+using RSBot.Python.Components.API.Handler;
+using RSBot.Python.Components.API.ModuleLoader;
 
 namespace RSBot.Python.Plugins
 {
@@ -31,7 +31,7 @@ namespace RSBot.Python.Plugins
             {
                 var info = PluginMetaReader.ReadPythonPluginInfo(file);
                 result.Add(info);
-            } 
+            }
 
             log($"[Python-API] Found {pythonFiles.Length} Plugins.");
             return result;
@@ -64,6 +64,7 @@ namespace RSBot.Python.Plugins
                 }
             });
         }
+
         public void UnloadPlugin(string fileName, Action<string> log)
         {
             using (Py.GIL())
@@ -82,7 +83,10 @@ namespace RSBot.Python.Plugins
                         {
                             return p.GetAttr("__name__").ToString() == moduleName;
                         }
-                        catch { return false; }
+                        catch
+                        {
+                            return false;
+                        }
                     });
 
                     dynamic gc = Py.Import("gc");
@@ -99,7 +103,8 @@ namespace RSBot.Python.Plugins
 
         public void ResetPlugins()
         {
-            if (_loadedPlugins.Count == 0) return;
+            if (_loadedPlugins.Count == 0)
+                return;
 
             using (Py.GIL())
             {
@@ -109,14 +114,13 @@ namespace RSBot.Python.Plugins
                 _loadedPlugins.Clear();
             }
         }
+
         public void CallPluginEvent(string e, Action<string> log, params object[] args)
         {
             using (Py.GIL())
             {
-                var pyArgs = args?
-                    .Select(a => a == null ? PyObject.None : a.ToPython())
-                    .ToArray()
-                    ?? Array.Empty<PyObject>();
+                var pyArgs =
+                    args?.Select(a => a == null ? PyObject.None : a.ToPython()).ToArray() ?? Array.Empty<PyObject>();
 
                 foreach (PyObject plugin in _loadedPlugins)
                 {
@@ -138,6 +142,5 @@ namespace RSBot.Python.Plugins
                     a.Dispose();
             }
         }
-
     }
 }

@@ -1,4 +1,10 @@
-﻿using Python.Runtime;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using Python.Runtime;
 using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Extensions;
@@ -8,12 +14,6 @@ using RSBot.Core.Objects.Skill;
 using RSBot.Core.Objects.Spawn;
 using RSBot.Python.Components.API.Interface;
 using RSBot.Python.Views;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace RSBot.Python.Components.API.Core.Entity
 {
@@ -34,6 +34,7 @@ namespace RSBot.Python.Components.API.Core.Entity
         {
             _main = main;
         }
+
         private string GetStatusText(QuestStatus status)
         {
             switch (status)
@@ -69,12 +70,18 @@ namespace RSBot.Python.Components.API.Core.Entity
                 {
                     var pyQuest = new PyDict();
                     var quest = activeQuest.Value;
-                    pyQuest.SetItem(new PyString("name"), new PyString(Game.ReferenceManager.GetTranslation(quest.Quest.NameString)));
+                    pyQuest.SetItem(
+                        new PyString("name"),
+                        new PyString(Game.ReferenceManager.GetTranslation(quest.Quest.NameString))
+                    );
                     pyQuest.SetItem(new PyString("id"), new PyInt(quest.Id));
                     pyQuest.SetItem(new PyString("level"), new PyInt(quest.Quest.Level));
                     pyQuest.SetItem(new PyString("status"), new PyString(GetStatusText(quest.Status)));
-                    pyQuest.SetItem(new PyString("npc"), new PyString(Game.ReferenceManager.GetTranslation(quest.Quest.NoticeNPC)));
-                    
+                    pyQuest.SetItem(
+                        new PyString("npc"),
+                        new PyString(Game.ReferenceManager.GetTranslation(quest.Quest.NoticeNPC))
+                    );
+
                     if (quest.Npcs?.Length > 0)
                     {
                         foreach (var npcId in quest.Npcs)
@@ -82,7 +89,7 @@ namespace RSBot.Python.Components.API.Core.Entity
                             var npc = Game.ReferenceManager.GetRefObjChar(npcId);
                             pyQuest.SetItem(new PyString("npc_name"), new PyInt(npc.NameStrID));
                             pyQuest.SetItem(new PyString("npc_id"), new PyInt(npc.ID));
-                            pyQuest.SetItem(new PyString("npc_servername"), new PyString(npc.CodeName));                            
+                            pyQuest.SetItem(new PyString("npc_servername"), new PyString(npc.CodeName));
                         }
                     }
                     if (quest.Quest.Reward != null)
@@ -102,10 +109,16 @@ namespace RSBot.Python.Components.API.Core.Entity
                         foreach (var rewardItem in quest.Quest.RewardItems)
                         {
                             if (rewardItem.Item != null)
-                                pyQuest.SetItem(new PyString("reward_item"), new PyString(rewardItem.Item.GetRealName()));
+                                pyQuest.SetItem(
+                                    new PyString("reward_item"),
+                                    new PyString(rewardItem.Item.GetRealName())
+                                );
 
                             if (rewardItem.OptionalItem != null)
-                                pyQuest.SetItem(new PyString("reward_optional"), new PyString(rewardItem.OptionalItem.GetRealName()));
+                                pyQuest.SetItem(
+                                    new PyString("reward_optional"),
+                                    new PyString(rewardItem.OptionalItem.GetRealName())
+                                );
                         }
                     }
 
@@ -124,7 +137,8 @@ namespace RSBot.Python.Components.API.Core.Entity
 
                 return result;
             }
-        }    
+        }
+
         public PyList get_quests()
         {
             return GetQuests();

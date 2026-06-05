@@ -26,7 +26,8 @@ public static class GeneralConfig
     /// <returns></returns>
     public static bool Exists(string key)
     {
-        if (_config == null) Load();
+        if (_config == null)
+            Load();
         return _config.Exists(key);
     }
 
@@ -37,7 +38,8 @@ public static class GeneralConfig
     /// <param name="defaultValue">The default value.</param>
     public static T Get<T>(string key, T defaultValue = default)
     {
-        if (_config == null) Load();
+        if (_config == null)
+            Load();
         return _config.Get(key, defaultValue);
     }
 
@@ -48,7 +50,8 @@ public static class GeneralConfig
     /// <param name="value">The value.</param>
     public static void Set<T>(string key, T value)
     {
-        if (_config == null) Load();
+        if (_config == null)
+            Load();
         _config.Set(key, value);
     }
 
@@ -57,7 +60,8 @@ public static class GeneralConfig
     /// </summary>
     public static void Save()
     {
-        if (_config == null) return;
+        if (_config == null)
+            return;
 
         try
         {

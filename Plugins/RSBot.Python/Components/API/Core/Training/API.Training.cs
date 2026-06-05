@@ -1,10 +1,10 @@
-﻿using Python.Runtime;
+﻿using System;
+using Python.Runtime;
 using RSBot.Core;
 using RSBot.Core.Event;
 using RSBot.Core.Objects;
 using RSBot.Python.Components.API.Interface;
 using RSBot.Python.Views;
-using System;
 
 namespace RSBot.Python.Components.API.Core.Training
 {
@@ -42,15 +42,21 @@ namespace RSBot.Python.Components.API.Core.Training
 
                 if (trainingArea.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    SetTrainingPosition(trainingArea.Position.X, trainingArea.Position.Y, trainingArea.Position.Region, trainingArea.Radius);
+                    SetTrainingPosition(
+                        trainingArea.Position.X,
+                        trainingArea.Position.Y,
+                        trainingArea.Position.Region,
+                        trainingArea.Radius
+                    );
                     return true;
                 }
             }
             return false;
         }
+
         private bool SetTrainingPosition(float x, float y, ushort region, int radius)
         {
-            if(Game.Player == null)
+            if (Game.Player == null)
             {
                 return false;
             }
@@ -65,8 +71,10 @@ namespace RSBot.Python.Components.API.Core.Training
                 PlayerConfig.Set("RSBot.Area.Z", pos.ZOffset);
                 PlayerConfig.Set("RSBot.Area.Radius", radius);
 
-                Log.Notify("[Python-API] New training area coordinates set. " +
-                    $"X: {pos.XOffset}, Y: {pos.YOffset}, Z: {pos.ZOffset}, Region: {pos.Region}");
+                Log.Notify(
+                    "[Python-API] New training area coordinates set. "
+                        + $"X: {pos.XOffset}, Y: {pos.YOffset}, Z: {pos.ZOffset}, Region: {pos.Region}"
+                );
                 EventManager.FireEvent("OnSetTrainingArea");
                 return true;
             }
@@ -76,10 +84,12 @@ namespace RSBot.Python.Components.API.Core.Training
                 return false;
             }
         }
+
         private bool SetTrainingScript(string path)
         {
             return false;
         }
+
         private PyDict GetTrainingArea(string name)
         {
             using (Py.GIL())
@@ -112,6 +122,7 @@ namespace RSBot.Python.Components.API.Core.Training
                 return result;
             }
         }
+
         private PyDict GetTrainingPosition()
         {
             using (Py.GIL())
@@ -127,10 +138,14 @@ namespace RSBot.Python.Components.API.Core.Training
                 result.SetItem(new PyString("z"), new PyFloat(area.Position.ZOffset));
                 result.SetItem(new PyString("radius"), new PyInt(area.Radius));
                 result.SetItem(new PyString("region"), new PyInt(area.Position.Region.Id));
-                result.SetItem(new PyString("region_name"), new PyString(Game.ReferenceManager.GetTranslation(area.Position.Region.ToString())));
+                result.SetItem(
+                    new PyString("region_name"),
+                    new PyString(Game.ReferenceManager.GetTranslation(area.Position.Region.ToString()))
+                );
                 return result;
             }
         }
+
         private void MoveToCoordinates(float x, float y, ushort region)
         {
             if (Game.Player != null)
@@ -138,7 +153,7 @@ namespace RSBot.Python.Components.API.Core.Training
                 try
                 {
                     Position pos = new(x, y, region);
-                    Game.Player.MoveTo(pos,false);
+                    Game.Player.MoveTo(pos, false);
                 }
                 catch (Exception e)
                 {
@@ -146,34 +161,42 @@ namespace RSBot.Python.Components.API.Core.Training
                 }
             }
         }
+
         private bool GetTrainingScript(string path)
         {
             return false;
         }
+
         public bool set_training_area(string name)
         {
             return SetTrainingArea(name);
         }
+
         public bool set_training_position(float x, float y, ushort region, int radius)
         {
             return SetTrainingPosition(x, y, region, radius);
         }
+
         public bool set_training_script(string path)
         {
             return SetTrainingScript(path);
         }
+
         public PyDict get_training_area(string name)
         {
             return GetTrainingArea(name);
         }
+
         public PyDict get_training_position()
         {
             return GetTrainingPosition();
         }
+
         public PyDict get_training_script()
         {
             return new PyDict();
         }
+
         public void move_to(float x, float y, ushort region)
         {
             MoveToCoordinates(x, y, region);
