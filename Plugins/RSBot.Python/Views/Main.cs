@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -40,6 +40,7 @@ public partial class Main : DoubleBufferedControl
         EventManager.SubscribeEvent("OnServerPacketReceive", OnServerPacketReceive);
         EventManager.SubscribeEvent("OnEnterGame", OnEnterGame);
         EventManager.SubscribeEvent("OnAgentServerDisconnected", OnAgentServerDisconnected);
+        EventManager.SubscribeEvent("OnRequestTeleport", new Action<uint, string>(OnRequestTeleport));
     }
 
     private void WireEvents()
@@ -145,6 +146,11 @@ public partial class Main : DoubleBufferedControl
     private void OnTeleportComplete()
     {
         _pyPlugins.CallPluginEvent("on_teleported", AppendLog, new PyInt(2));
+    }
+
+    private void OnRequestTeleport(uint destination, string npcCodeName)
+    {
+        _pyPlugins.CallPluginEvent("on_teleport_request", AppendLog, destination.ToString(), npcCodeName);
     }
 
     private void OnClientPacketReceive(Packet packet)

@@ -1,8 +1,11 @@
-﻿using System;
+using System;
 using Python.Runtime;
 using RSBot.Core;
 using RSBot.Core.Event;
 using RSBot.Core.Objects;
+using RSBot.Core.Objects.Spawn;
+using RSBot.Core.Components;
+using RSBot.Core.Network;
 using RSBot.Python.Components.API.Interface;
 using RSBot.Python.Views;
 
@@ -200,6 +203,34 @@ namespace RSBot.Python.Components.API.Core.Training
         public void move_to(float x, float y, ushort region)
         {
             MoveToCoordinates(x, y, region);
+        }
+
+        public bool teleport(string npcCodeName, uint destination)
+        {
+            if (Game.Player == null)
+                return false;
+
+            if (!SpawnManager.TryGetEntity<SpawnedBionic>(p => p.Record.CodeName == npcCodeName, out var entity))
+            {
+                Log.Debug("[Python-API] Could not find teleporter NPC " + npcCodeName);
+                return false;
+            }
+
+            if (!entity.TrySelect())
+                return false;
+
+            var packet = new Packet(0x705A);
+            packet.WriteUInt(entity.UniqueId);
+            packet.WriteByte(0x02);
+            packet.WriteUInt(destination);
+
+            var gameReadyOpcode = (ushort)(Game.ClientType == GameClientType.Rigid ? 0x3077 : 0x3012);
+            var callback = new AwaitCallback(null, gameReadyOpcode); // Game Ready
+            PacketManager.SendPacket(packet, PacketDestination.Server, callback);
+
+            callback.AwaitResponse(30_000); //For some really slow PCs
+
+            return true;
         }
     }
 }

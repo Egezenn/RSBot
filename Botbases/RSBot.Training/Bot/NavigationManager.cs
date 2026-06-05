@@ -372,21 +372,36 @@ internal static class NavigationManager
     {
         var totalPath = new List<NodePathStep>();
         var current = endSid;
+        var skipNext = false;
 
         while (cameFrom.ContainsKey(current))
         {
             var entry = cameFrom[current];
             var node = linkage.Nodes[sidToNids[current][0]];
+            var isTeleport = entry.Edge != null && entry.Edge.Type == "teleport";
 
-            totalPath.Insert(
-                0,
-                new NodePathStep
-                {
-                    NodeId = sidToNids[current][0],
-                    Position = new Position(node.X, node.Y, node.Region),
-                    Edge = entry.Edge,
-                }
-            );
+            if (!skipNext)
+            {
+                totalPath.Insert(
+                    0,
+                    new NodePathStep
+                    {
+                        NodeId = sidToNids[current][0],
+                        Position = new Position(node.X, node.Y, node.Region),
+                        Edge = entry.Edge,
+                    }
+                );
+            }
+            else
+            {
+                skipNext = false;
+            }
+
+            if (isTeleport)
+            {
+                skipNext = true;
+            }
+
             current = entry.PrevSid;
         }
 
@@ -435,7 +450,7 @@ internal static class NavigationManager
 
         foreach (var step in activePath)
         {
-            if (step.Edge.Type == "teleport")
+            if (step.Edge != null && step.Edge.Type == "teleport")
             {
                 rbsLines.Add($"teleport {step.Edge.Npc} {step.Edge.Dest}");
                 lastPos = step.Position;
