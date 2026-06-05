@@ -9,7 +9,7 @@ The project is built using `MSBuild`.
 - Generic path: `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`.
 - Debug flags: `/p:Configuration=Debug /p:Platform=x86`
 - Release flags: `/p:Configuration=Release /p:Platform=x86`
-- Solution to build: `.\RSBot.sln`
+- Solution to build: `.\OasisBot.sln`
 
 - Use `.\scripts\build.ps1` to take builds.
 - For execution policy issues use with `powershell.exe -ExecutionPolicy Bypass .\scripts\build.ps1`
@@ -59,9 +59,9 @@ UI is handled by the submodule `.\SDUI`. If you encounter any issues where it do
 
 ### Build structure
 
-| Name        | Directory           | Description                                                         |
-| ----------- | ------------------- | ------------------------------------------------------------------- |
-| `RSBot.exe` | `.\Build\RSBot.exe` | Main application executable                                         |
-| `Data`      | `.\Build\Data`      | Where dependencies, botbases, plugins, townscripts etc. goes        |
-| `User`      | `.\Build\User`      | Autologin info, user configs and available profiles                 |
-| `Logs`      | `.\Build\User\Logs` | Logs for each character and environment stored in a ISO dated file. |
+| Name           | Directory              | Description                                                         |
+| -------------- | ---------------------- | ------------------------------------------------------------------- |
+| `OasisBot.exe` | `.\Build\OasisBot.exe` | Main application executable                                         |
+| `Data`         | `.\Build\Data`         | Where dependencies, botbases, plugins, townscripts etc. goes        |
+| `User`         | `.\Build\User`         | Autologin info, user configs and available profiles                 |
+| `Logs`         | `.\Build\User\Logs`    | Logs for each character and environment stored in a ISO dated file. |

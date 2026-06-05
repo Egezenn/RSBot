@@ -1,4 +1,4 @@
-# [RSBot](https://silkroad-developer-community.github.io/RSBot/)
+# [OasisBot](https://silkroad-developer-community.github.io/OasisBot/)
 
 Free, open source Silkroad Online bot for everyone to use!
 
@@ -6,26 +6,26 @@ Feel free to edit the code, create pull requests for any and all improvements, c
 
 To join the conversation, get recent updates/announcements, join our [Discord server](https://discord.gg/FEmNcz7QwP).
 
-[![GitHub Issues](https://img.shields.io/github/issues/Silkroad-Developer-Community/RSBot?label=Open%20Issues)](https://github.com/Silkroad-Developer-Community/rsbot/issues)
-[![downloads](https://img.shields.io/github/downloads/Silkroad-Developer-Community/RSBot/total?label=Total%20Downloads)](https://github.com/Silkroad-Developer-Community/RSBot/releases)
-[![downloads-latest](https://img.shields.io/github/downloads/Silkroad-Developer-Community/RSBot/latest/total?label=Latest%20release)](https://github.com/Silkroad-Developer-Community/RSBot/releases/latest)
+[![GitHub Issues](https://img.shields.io/github/issues/Silkroad-Developer-Community/OasisBot?label=Open%20Issues)](https://github.com/Silkroad-Developer-Community/OasisBot/issues)
+[![downloads](https://img.shields.io/github/downloads/Silkroad-Developer-Community/OasisBot/total?label=Total%20Downloads)](https://github.com/Silkroad-Developer-Community/OasisBot/releases)
+[![downloads-latest](https://img.shields.io/github/downloads/Silkroad-Developer-Community/OasisBot/latest/total?label=Latest%20release)](https://github.com/Silkroad-Developer-Community/OasisBot/releases/latest)
 
-| Links                                                                                                                                                                                                            |                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| [![release-latest](https://img.shields.io/github/v/release/Silkroad-Developer-Community/RSBot?label=Latest%20Stable&style=for-the-badge)](https://github.com/Silkroad-Developer-Community/RSBot/releases/latest) | Latest stable release                      |
-| [![release-all](https://img.shields.io/badge/Latest%20Release-Nightly-FF0000?style=for-the-badge)](https://github.com/Silkroad-Developer-Community/RSBot/releases)                                               | Nightly releases for most recent features  |
-| [![release-manager](https://img.shields.io/badge/Latest%20Release-Manager-00DD00?style=for-the-badge)](https://github.com/Silkroad-Developer-Community/Rsbot-Manager/releases/latest)                            | Manager for multiple bot profiles          |
-| [![docs](https://img.shields.io/badge/RSBot-Docs-FF00FF?style=for-the-badge)](https://Silkroad-Developer-Community.github.io/RSBot)                                                                              | Documentation, tips & tricks and tutorials |
+| Links                                                                                                                                                                                                                  |                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [![release-latest](https://img.shields.io/github/v/release/Silkroad-Developer-Community/OasisBot?label=Latest%20Stable&style=for-the-badge)](https://github.com/Silkroad-Developer-Community/OasisBot/releases/latest) | Latest stable release                      |
+| [![release-all](https://img.shields.io/badge/Latest%20Release-Nightly-FF0000?style=for-the-badge)](https://github.com/Silkroad-Developer-Community/OasisBot/releases)                                                  | Nightly releases for most recent features  |
+| [![release-manager](https://img.shields.io/badge/Latest%20Release-Manager-00DD00?style=for-the-badge)](https://github.com/Silkroad-Developer-Community/OasisBot-Manager/releases/latest)                               | Manager for multiple bot profiles          |
+| [![docs](https://img.shields.io/badge/OasisBot-Docs-FF00FF?style=for-the-badge)](https://Silkroad-Developer-Community.github.io/OasisBot)                                                                              | Documentation, tips & tricks and tutorials |
 
 ## Building the project
 
-- Clone the repository with the command `git clone --recursive https://github.com/Silkroad-Developer-Community/RSBot.git`)
+- Clone the repository with the command `git clone --recursive https://github.com/Silkroad-Developer-Community/OasisBot.git`)
 
 ### Visual Studio
 
 - Open the project in [Visual Studio 2026](https://visualstudio.microsoft.com/downloads/) (Required workloads are `.NET desktop development` and `Desktop development with C++`)
 - Build the project (<kbd>Ctrl+Shift+B</kbd>)
-- Run the compiled executable from `Build\RSBot.exe`
+- Run the compiled executable from `Build\OasisBot.exe`
 
 ### Other
 
@@ -57,3 +57,7 @@ Run the commands below (You still need MSBuild tooling via Visual Studio):
 | Vietnam         | VTC Game                      |
 | ~~Chinese Old~~ | ~~MHTC~~                      |
 | ~~Japanese-R~~  |                               |
+
+## Credits
+
+OasisBot was originally developed by [**ngoedde**](https://github.com/ngoedde) (Niklas Gödde/torstmn/Wimbeam) and [**SDClowen**](https://github.com/myildirimofficial) (Mahmut YILDIRIM). This repository is a community-led fork maintained by the Silkroad Developer Community.

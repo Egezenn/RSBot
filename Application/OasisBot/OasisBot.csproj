@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>RSBot</RootNamespace>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <OutputPath>.\..\..\Build</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Description>A open source bot for Silkroad Online</Description>
+    <Copyright>Copyright © 2018-2026 RSBot Team; 2026 Silkroad Developer Community</Copyright>
+    <PackageProjectUrl>https://github.com/Silkroad-Developer-Community/RSBot</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Silkroad-Developer-Community/RSBot</RepositoryUrl>
+    <AssemblyName>OasisBot</AssemblyName>
+    <Title>OasisBot</Title>
+    <Product>OasisBot</Product>
+    <Company>Silkroad Developer Community</Company>
+    <OutputType>Exe</OutputType>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <InformationalVersion>2.10.0</InformationalVersion>
+    <AssemblyVersion>2.10.0</AssemblyVersion>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseWPF>False</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\RSBot.Core\RSBot.Core.csproj">
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SDUI\SDUI\SDUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="pythonnet" Version="3.0.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+  </ItemGroup>
+  <Target Name="CopyDependencies" AfterTargets="Build">
+    <ItemGroup>
+      <DependencyFiles Include="..\..\Dependencies\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="..\..\Build\Data\%(RecursiveDir)" />
+  </Target>
+</Project>
+
