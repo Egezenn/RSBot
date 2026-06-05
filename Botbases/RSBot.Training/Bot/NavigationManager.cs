@@ -262,7 +262,6 @@ internal static class NavigationManager
             _targetPosition = targetPos;
             _linkage = null; // Clear linkage data once path is cached to save memory
         }
-        GC.Collect();
 
         return true;
     }
@@ -481,7 +480,8 @@ internal static class NavigationManager
             var y = start.Y + (end.Y - start.Y) * t;
             var z = start.ZOffset + (end.ZOffset - start.ZOffset) * t;
 
-            var interpolatedPos = new Position(x, y, start.Region) { ZOffset = z };
+            var currentRegion = t < 0.5 ? start.Region : end.Region;
+            var interpolatedPos = new Position(x, y, currentRegion) { ZOffset = z };
             rbsLines.Add(
                 $"move {interpolatedPos.XOffset} {interpolatedPos.YOffset} {interpolatedPos.ZOffset} {interpolatedPos.Region.X} {interpolatedPos.Region.Y}"
             );
