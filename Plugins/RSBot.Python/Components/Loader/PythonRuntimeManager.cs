@@ -1,10 +1,9 @@
-﻿using Python.Runtime;
-using RSBot.Python.Components.API.Handler;
-using RSBot.Python.Components.API.ModuleLoader;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
-
+using Python.Runtime;
+using RSBot.Python.Components.API.Handler;
+using RSBot.Python.Components.API.ModuleLoader;
 
 namespace RSBot.Python.Components.Loader
 {
@@ -14,7 +13,8 @@ namespace RSBot.Python.Components.Loader
 
         public void Initialize(string projectDir, Action<string> log)
         {
-            if (IsInitialized) return;
+            if (IsInitialized)
+                return;
 
             string pythonHome = Path.Combine(projectDir, "Data", "Python", "PyRuntime");
             string pythonDll = Directory.GetFiles(pythonHome, "python31*.dll").FirstOrDefault();
@@ -38,7 +38,8 @@ namespace RSBot.Python.Components.Loader
             {
                 try
                 {
-                    PythonEngine.Exec(@"
+                    PythonEngine.Exec(
+                        @"
 import clr, sys, types
 clr.AddReference('RSBot.Python')
 from RSBot.Python.Components.API.ModuleLoader import PythonPluginAccessor
@@ -58,7 +59,8 @@ sys.modules['RSBot'] = RSBot
 
 from RSBot.Python.Components.API.GUI import WFAPI
 RSBot.GUI = WFAPI.GUI
-");
+"
+                    );
                     IsInitialized = true;
                     log("[Python-API] Python initialised and created RSBot Module.");
                 }

@@ -7,11 +7,13 @@ namespace RSBot.Map
         public string InternalName => "RSBot.Map";
         public static MapPlugin Instance { get; private set; }
         public MapManager Manager { get; private set; }
-        public void Initialize() 
+
+        public void Initialize()
         {
             Instance = this;
             Manager = new MapManager();
         }
+
         public void OnLoadCharacter()
         {
             Views.View.Instance?.InitUniqueObjects();

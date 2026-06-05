@@ -8,6 +8,7 @@ namespace RSBot.Inventory
         public string InternalName => "RSBot.Inventory";
         public static InventoryPlugin Instance { get; private set; }
         public InventoryManager Manager { get; private set; }
+
         public void Initialize()
         {
             Instance = this;
@@ -16,6 +17,7 @@ namespace RSBot.Inventory
             InventoryUpdateSubscriber.SubscribeEvents();
             UseItemAtTrainplaceSubscriber.SubscribeEvents();
         }
+
         public void OnLoadCharacter() { }
     }
 }

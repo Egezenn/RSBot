@@ -15,7 +15,6 @@ namespace RSBot.Python.Components.API.GUI.Controls
             _callback = callback;
             if (_callback != null)
             {
-
                 cb.CheckedChanged += (sender, args) =>
                 {
                     using (Py.GIL())
@@ -31,7 +30,6 @@ namespace RSBot.Python.Components.API.GUI.Controls
                     }
                 };
             }
-
         }
 
         private bool GetChecked()
@@ -48,6 +46,7 @@ namespace RSBot.Python.Components.API.GUI.Controls
         {
             return GetChecked();
         }
+
         public void set_checked(bool value)
         {
             SetChecked(value);

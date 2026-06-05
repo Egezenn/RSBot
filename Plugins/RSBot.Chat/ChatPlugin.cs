@@ -1,5 +1,5 @@
-using RSBot.Core.Plugins;
 using RSBot.Core.Components.Command;
+using RSBot.Core.Plugins;
 
 namespace RSBot.Chat
 {
@@ -8,6 +8,7 @@ namespace RSBot.Chat
         public string InternalName => "RSBot.Chat";
         public static ChatPlugin Instance { get; private set; }
         public ChatManager Manager { get; private set; }
+
         public void Initialize()
         {
             Instance = this;
@@ -15,6 +16,7 @@ namespace RSBot.Chat
 
             CLIManager.Register(new ChatCLICommand());
         }
-        public void OnLoadCharacter() { } 
+
+        public void OnLoadCharacter() { }
     }
 }

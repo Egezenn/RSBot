@@ -96,5 +96,5 @@ public class LureBotbase : IBotbase
     public void Register()
     {
         Log.Debug("[Lure] Botbase registered to the kernel!");
-    }    
+    }
 }

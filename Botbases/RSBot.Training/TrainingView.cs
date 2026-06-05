@@ -1,7 +1,7 @@
-﻿using RSBot.Core;
+﻿using System.Windows.Forms;
+using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Plugins;
-using System.Windows.Forms;
 
 namespace RSBot.Training
 {
@@ -18,8 +18,6 @@ namespace RSBot.Training
         /// </summary>
         /// <returns></returns>
         public Control View => Views.View.Instance;
-
-
 
         /// <summary>
         ///     Translate the botbase plugin

@@ -42,10 +42,12 @@ namespace RSBot.Python.Components.API.GUI.Controls
         {
             Invoke(() => ((SDUI.Controls.TextBox)Control).Text = text);
         }
+
         public string get_text()
         {
             return GetText();
         }
+
         public void set_text_value(string text)
         {
             SetTextValue(text);

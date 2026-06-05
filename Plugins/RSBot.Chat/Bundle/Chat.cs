@@ -1,8 +1,8 @@
-﻿using RSBot.Core;
+﻿using System.Collections.Generic;
+using RSBot.Core;
 using RSBot.Core.Extensions;
 using RSBot.Core.Network;
 using RSBot.Core.Objects;
-using System.Collections.Generic;
 
 namespace RSBot.Chat.Bundle;
 

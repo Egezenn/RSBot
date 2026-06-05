@@ -1,6 +1,6 @@
-﻿using RSBot.Python.Components.API.ModuleLoader;
-using System.IO;
+﻿using System.IO;
 using System.Text.RegularExpressions;
+using RSBot.Python.Components.API.ModuleLoader;
 
 namespace RSBot.Python.Components.API.Handler
 {
@@ -13,11 +13,7 @@ namespace RSBot.Python.Components.API.Handler
 
             string ReadConst(string key)
             {
-                var m = Regex.Match(
-                    text,
-                    $@"^\s*{key}\s*=\s*[""'](?<v>[^""']+)[""']\s*$",
-                    RegexOptions.Multiline
-                );
+                var m = Regex.Match(text, $@"^\s*{key}\s*=\s*[""'](?<v>[^""']+)[""']\s*$", RegexOptions.Multiline);
                 return m.Success ? m.Groups["v"].Value.Trim() : null;
             }
 
@@ -37,7 +33,7 @@ namespace RSBot.Python.Components.API.Handler
                 Name = ReadConst("NAME") ?? ReadHeader("Name") ?? Path.GetFileNameWithoutExtension(fileName),
                 Description = ReadConst("DESCRIPTION") ?? ReadHeader("Description") ?? "",
                 Author = ReadConst("AUTHOR") ?? ReadHeader("Author") ?? "",
-                Version = ReadConst("VERSION") ?? ReadHeader("Version") ?? ""
+                Version = ReadConst("VERSION") ?? ReadHeader("Version") ?? "",
             };
         }
     }

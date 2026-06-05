@@ -1,6 +1,4 @@
 ﻿namespace RSBot.Statistics
 {
-    public class StatisticsManager
-    {
-    }
+    public class StatisticsManager { }
 }

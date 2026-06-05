@@ -10,7 +10,7 @@ namespace RSBot.Items
         public ItemsManager Manager { get; private set; }
 
         /// <inheritdoc />
-        public void Initialize() 
+        public void Initialize()
         {
             Instance = this;
             Manager = new ItemsManager();
@@ -18,6 +18,5 @@ namespace RSBot.Items
 
         /// <inheritdoc />
         public void OnLoadCharacter() { }
-
     }
 }

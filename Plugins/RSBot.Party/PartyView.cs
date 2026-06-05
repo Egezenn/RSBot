@@ -1,7 +1,7 @@
-﻿using RSBot.Core;
+﻿using System.Windows.Forms;
+using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Plugins;
-using System.Windows.Forms;
 
 namespace RSBot.Party
 {
@@ -13,6 +13,7 @@ namespace RSBot.Party
         public int Index => 3;
         public bool RequireIngame => true;
         public Control View => Views.View.Instance;
+
         public void Translate()
         {
             LanguageManager.Translate(View, Kernel.Language);

@@ -324,7 +324,12 @@ public partial class Main : DoubleBufferedControl
                         // Avoid painting vehicles from main player
                         if (Game.Player.Vehicle?.UniqueId != entry.UniqueId)
                         {
-                            AddGridItem(entry.Name, entry.Record?.GetRealName(), entry.Record.Level, entry.Movement.Source);
+                            AddGridItem(
+                                entry.Name,
+                                entry.Record?.GetRealName(),
+                                entry.Record.Level,
+                                entry.Movement.Source
+                            );
                             DrawPointAt(graphics, entry.Movement.Source, 1);
                         }
 

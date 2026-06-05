@@ -1,12 +1,11 @@
-﻿using RSBot.Python.Components.API.GUI;
-using RSBot.Python.Components.API.GUI.Wrapper;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-
+using RSBot.Python.Components.API.GUI;
+using RSBot.Python.Components.API.GUI.Wrapper;
 
 namespace RSBot.Python.Components.API.ModuleLoader
 {
@@ -52,20 +51,20 @@ namespace RSBot.Python.Components.API.ModuleLoader
                 var type = plugin.GetType();
 
                 var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                                  .Where(m =>
-                                      !m.IsSpecialName &&                 
-                                      m.Name != "Init" &&                   
-                                      m.Name != "ToString" &&
-                                      m.Name != "Equals" &&
-                                      m.Name != "GetHashCode" &&
-                                      m.Name != "GetType");
+                    .Where(m =>
+                        !m.IsSpecialName
+                        && m.Name != "Init"
+                        && m.Name != "ToString"
+                        && m.Name != "Equals"
+                        && m.Name != "GetHashCode"
+                        && m.Name != "GetType"
+                    );
 
                 foreach (var method in methods)
                 {
                     var name = method.Name;
                     var parameters = method.GetParameters();
-                    var paramList = string.Join(", ",
-                        parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
+                    var paramList = string.Join(", ", parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
 
                     var returnType = MapType(method.ReturnType);
 
@@ -91,20 +90,21 @@ namespace RSBot.Python.Components.API.ModuleLoader
             sb.AppendLine("class GUI:");
             sb.AppendLine("    def __init__(self, plugin_name: str) -> None: ...");
 
-            var methods = guiNestedType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                                       .Where(m =>
-                                           !m.IsSpecialName &&
-                                           m.Name != "ToString" &&
-                                           m.Name != "Equals" &&
-                                           m.Name != "GetHashCode" &&
-                                           m.Name != "GetType");
+            var methods = guiNestedType
+                .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(m =>
+                    !m.IsSpecialName
+                    && m.Name != "ToString"
+                    && m.Name != "Equals"
+                    && m.Name != "GetHashCode"
+                    && m.Name != "GetType"
+                );
 
             foreach (var method in methods)
             {
                 var name = method.Name;
                 var parameters = method.GetParameters();
-                var paramList = string.Join(", ",
-                    parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
+                var paramList = string.Join(", ", parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
 
                 string returnType;
 
@@ -117,22 +117,19 @@ namespace RSBot.Python.Components.API.ModuleLoader
                     returnType = MapType(method.ReturnType);
                 }
 
-
                 sb.AppendLine($"    def {name}(self, {paramList}) -> {returnType}: ...");
             }
 
             sb.AppendLine();
         }
+
         // 3 GuiControlWrapper-Childs
         private static void WriteGuiWrappers(StringBuilder sb)
         {
             var asm = typeof(GuiControlWrapper).Assembly;
 
             var wrappers = asm.GetTypes()
-                .Where(t =>
-                    typeof(GuiControlWrapper).IsAssignableFrom(t) &&
-                    !t.IsAbstract &&
-                    t.IsClass);
+                .Where(t => typeof(GuiControlWrapper).IsAssignableFrom(t) && !t.IsAbstract && t.IsClass);
 
             if (!wrappers.Any())
             {
@@ -149,15 +146,17 @@ namespace RSBot.Python.Components.API.ModuleLoader
                 var className = wrapperType.Name;
                 sb.AppendLine($"class {className}:");
 
-                var methods = wrapperType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                var methods = wrapperType
+                    .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                     .Where(m =>
-                           m.DeclaringType != typeof(object) &&
-                           m.DeclaringType != typeof(Control) &&
-                           !m.IsSpecialName &&
-                           m.Name != "ToString" &&
-                           m.Name != "Equals" &&
-                           m.Name != "GetHashCode" &&
-                           m.Name != "GetType");
+                        m.DeclaringType != typeof(object)
+                        && m.DeclaringType != typeof(Control)
+                        && !m.IsSpecialName
+                        && m.Name != "ToString"
+                        && m.Name != "Equals"
+                        && m.Name != "GetHashCode"
+                        && m.Name != "GetType"
+                    );
 
                 if (!methods.Any())
                 {
@@ -170,8 +169,7 @@ namespace RSBot.Python.Components.API.ModuleLoader
                 {
                     var name = method.Name;
                     var parameters = method.GetParameters();
-                    var paramList = string.Join(", ",
-                        parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
+                    var paramList = string.Join(", ", parameters.Select(p => $"{p.Name}: {MapType(p.ParameterType)}"));
 
                     string returnType;
 
@@ -183,7 +181,6 @@ namespace RSBot.Python.Components.API.ModuleLoader
                     {
                         returnType = MapType(method.ReturnType);
                     }
-
 
                     if (paramList.Length > 0)
                         sb.AppendLine($"    def {name}(self, {paramList}) -> {returnType}: ...");
@@ -198,12 +195,18 @@ namespace RSBot.Python.Components.API.ModuleLoader
         // Typ-Mapping C# -> Python Typen
         private static string MapType(Type t)
         {
-            if (t == typeof(void)) return "None";
-            if (t == typeof(int)) return "int";
-            if (t == typeof(long)) return "int";
-            if (t == typeof(float) || t == typeof(double) || t == typeof(decimal)) return "float";
-            if (t == typeof(string)) return "str";
-            if (t == typeof(bool)) return "bool";
+            if (t == typeof(void))
+                return "None";
+            if (t == typeof(int))
+                return "int";
+            if (t == typeof(long))
+                return "int";
+            if (t == typeof(float) || t == typeof(double) || t == typeof(decimal))
+                return "float";
+            if (t == typeof(string))
+                return "str";
+            if (t == typeof(bool))
+                return "bool";
 
             if (typeof(System.Collections.IDictionary).IsAssignableFrom(t))
                 return "dict";

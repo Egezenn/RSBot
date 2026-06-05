@@ -18,7 +18,7 @@ namespace RSBot.Core.Network.Handler.Agent.Entity
             var uniqueId = packet.ReadUInt();
             var flag = (PvpFlag)packet.ReadByte();
 
-            if(Game.Player.UniqueId == uniqueId)
+            if (Game.Player.UniqueId == uniqueId)
             {
                 var oldFlag = Game.Player.PvpFlag;
                 Game.Player.PvpFlag = flag;
@@ -32,7 +32,6 @@ namespace RSBot.Core.Network.Handler.Agent.Entity
 
             var oldPvpFlag = entity.PvpCape;
             entity.PvpCape = flag;
-
 
             Log.Notify($"[{entity.Name}] pvp status updated from {oldPvpFlag} to {flag}");
         }

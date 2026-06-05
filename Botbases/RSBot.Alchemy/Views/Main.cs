@@ -148,13 +148,15 @@ public partial class Main : DoubleBufferedControl
                 var newComboItem = new InventoryItemComboboxItem(item);
 
                 int firstSlot = 13;
-                if (Game.ClientType == GameClientType.Global
+                if (
+                    Game.ClientType == GameClientType.Global
                     || Game.ClientType == GameClientType.Korean
                     || Game.ClientType == GameClientType.VTC_Game
                     || Game.ClientType == GameClientType.RuSro
                     || Game.ClientType == GameClientType.Turkey
                     || Game.ClientType == GameClientType.Taiwan
-                    || Game.ClientType == GameClientType.Japanese)
+                    || Game.ClientType == GameClientType.Japanese
+                )
                     firstSlot = 17; //4 slots for relics
 
                 if (item.Slot >= firstSlot)

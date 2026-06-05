@@ -15,10 +15,12 @@ public partial class Main : DoubleBufferedControl
         SubscribeEvents();
         UpdateServerInfo();
     }
+
     private void SubscribeEvents()
     {
         EventManager.SubscribeEvent("OnServerListUpdated", UpdateServerInfo);
     }
+
     private void UpdateServerInfo()
     {
         if (this.InvokeRequired)

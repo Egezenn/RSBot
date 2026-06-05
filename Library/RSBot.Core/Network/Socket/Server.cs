@@ -1,9 +1,9 @@
-﻿using RSBot.Core.Event;
-using RSBot.Core.Extensions;
-using RSBot.Core.Network.Protocol;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using RSBot.Core.Event;
+using RSBot.Core.Extensions;
+using RSBot.Core.Network.Protocol;
 
 namespace RSBot.Core.Network;
 
@@ -67,7 +67,7 @@ public class Server : NetBase
                 {
                     _socket.Connect(ip, port, 3000);
                 }
-                }
+            }
             catch (AggregateException s)
             {
                 Log.Error(s.Message);
@@ -120,8 +120,15 @@ public class Server : NetBase
 
             if (receivedSize == 0 || error != SocketError.Success)
             {
-                if (!IsClosing && EnablePacketDispatcher && _receivedInitialHandshake && !_receivedPostInitialHandshakePacket)
-                    Log.Notify("Gateway closed immediately after initial 0x5000 before handshake completed. Possible IP/session limit");
+                if (
+                    !IsClosing
+                    && EnablePacketDispatcher
+                    && _receivedInitialHandshake
+                    && !_receivedPostInitialHandshakePacket
+                )
+                    Log.Notify(
+                        "Gateway closed immediately after initial 0x5000 before handshake completed. Possible IP/session limit"
+                    );
 
                 OnDisconnected();
                 return;

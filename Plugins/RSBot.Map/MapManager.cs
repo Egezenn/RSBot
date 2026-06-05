@@ -1,6 +1,4 @@
 ﻿namespace RSBot.Map
 {
-    public class MapManager
-    {
-    }
+    public class MapManager { }
 }

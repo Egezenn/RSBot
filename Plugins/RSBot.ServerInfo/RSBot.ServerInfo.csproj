@@ -20,4 +20,3 @@
     <ProjectReference Include="..\RSBot.General\RSBot.General.csproj" />
   </ItemGroup>
 </Project>
-

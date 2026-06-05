@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace RSBot.Trade
 {
-    internal class TradeManager
-    {
-    }
+    internal class TradeManager { }
 }

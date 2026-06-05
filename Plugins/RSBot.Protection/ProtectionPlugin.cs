@@ -10,6 +10,7 @@ namespace RSBot.Protection
         public string InternalName => "RSBot.Protection";
         public static ProtectionPlugin Instance { get; private set; }
         public ProtectionManager Manager { get; private set; }
+
         public void Initialize()
         {
             Instance = this;
@@ -39,6 +40,7 @@ namespace RSBot.Protection
             DurabilityLowHandler.Initialize();
             FatigueHandler.Initialize();
         }
+
         public void OnLoadCharacter() { }
     }
 }

@@ -1,6 +1,4 @@
 ﻿namespace RSBot.Python
 {
-    public class PythonManager
-    {
-    }
+    public class PythonManager { }
 }

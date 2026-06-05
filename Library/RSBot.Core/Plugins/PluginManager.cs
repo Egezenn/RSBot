@@ -35,7 +35,7 @@ public class PluginManager
         if (Extensions != null)
             return false;
 
-        Extensions = new Dictionary<string, IPlugin>();        
+        Extensions = new Dictionary<string, IPlugin>();
         ExtensionsViews = new Dictionary<string, IPluginView>();
 
         try
@@ -65,7 +65,9 @@ public class PluginManager
                 }
             }
             //order by index, not alphabeticaly
-            ExtensionsViews = ExtensionsViews.OrderBy(entry => entry.Value.Index).ToDictionary(x => x.Key, x => x.Value);
+            ExtensionsViews = ExtensionsViews
+                .OrderBy(entry => entry.Value.Index)
+                .ToDictionary(x => x.Key, x => x.Value);
 
             EventManager.FireEvent("OnLoadPlugins");
 
@@ -90,7 +92,7 @@ public class PluginManager
     {
         var plugins = new Dictionary<string, IPlugin>();
         var views = new Dictionary<string, IPluginView>();
-;
+        ;
 
         try
         {

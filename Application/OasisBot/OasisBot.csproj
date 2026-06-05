@@ -47,4 +47,3 @@
     <Copy SourceFiles="@(DependencyFiles)" DestinationFolder="..\..\Build\Data\%(RecursiveDir)" />
   </Target>
 </Project>
-

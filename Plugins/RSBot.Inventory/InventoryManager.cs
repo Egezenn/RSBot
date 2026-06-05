@@ -1,6 +1,6 @@
-﻿using RSBot.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using RSBot.Core;
 
 namespace RSBot.Inventory
 {
@@ -14,6 +14,7 @@ namespace RSBot.Inventory
             var item = Game.Player.Inventory.GetItemAt(slot);
             item?.Use();
         }
+
         /// <summary>
         /// Drops an item from a specific slot
         /// </summary>
@@ -22,6 +23,7 @@ namespace RSBot.Inventory
             var item = Game.Player.Inventory.GetItemAt(slot);
             item?.Drop();
         }
+
         /// <summary>
         /// Toggeles the state of an item for the use at the Trainingplace
         /// </summary>
@@ -44,6 +46,7 @@ namespace RSBot.Inventory
             PlayerConfig.SetArray("RSBot.Inventory.ItemsAtTrainplace", items);
             return isEnabled;
         }
+
         /// <summary>
         /// Toggeles the state of an item for the automatic use
         /// </summary>
@@ -67,7 +70,10 @@ namespace RSBot.Inventory
             return isNowEnabled;
         }
 
-        public static List<string> GetItemsAtTrainplace() => PlayerConfig.GetArray<string>("RSBot.Inventory.ItemsAtTrainplace").ToList();
-        public static List<string> GetItemsByPurpose() => PlayerConfig.GetArray<string>("RSBot.Inventory.AutoUseAccordingToPurpose").ToList();
+        public static List<string> GetItemsAtTrainplace() =>
+            PlayerConfig.GetArray<string>("RSBot.Inventory.ItemsAtTrainplace").ToList();
+
+        public static List<string> GetItemsByPurpose() =>
+            PlayerConfig.GetArray<string>("RSBot.Inventory.AutoUseAccordingToPurpose").ToList();
     }
 }

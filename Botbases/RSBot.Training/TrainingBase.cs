@@ -1,4 +1,5 @@
-﻿using RSBot.Core;
+﻿using System;
+using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Objects;
 using RSBot.Core.Plugins;
@@ -6,7 +7,6 @@ using RSBot.Training.Bot;
 using RSBot.Training.Bundle;
 using RSBot.Training.Components;
 using RSBot.Training.Subscriber;
-using System;
 
 namespace RSBot.Training
 {
@@ -56,6 +56,7 @@ namespace RSBot.Training
                 Log.Fatal(ex);
             }
         }
+
         /// <summary>
         ///     Starts this instance.
         /// </summary>

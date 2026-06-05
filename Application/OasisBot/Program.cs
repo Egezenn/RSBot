@@ -1,18 +1,18 @@
-using CommandLine;
-using CommandLine.Text;
-using RSBot.Core;
-using RSBot.Core.Components;
-using RSBot.Core.Event;
-using RSBot.Core.Objects;
-using RSBot.Views;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using CommandLine;
+using CommandLine.Text;
+using RSBot.Core;
+using RSBot.Core.Components;
 using RSBot.Core.Components.Command;
-using System.Runtime.InteropServices;
+using RSBot.Core.Event;
+using RSBot.Core.Objects;
+using RSBot.Views;
 
 namespace RSBot;
 
@@ -47,6 +47,7 @@ internal static class Program
 
         [Option("launch-clientless", Required = false, HelpText = "Start clientless")]
         public bool LaunchClientless { get; set; }
+
         [Option("headless", Required = false, HelpText = "Start the bot without graphical user interface")]
         public bool Headless { get; set; }
     }
@@ -82,7 +83,9 @@ internal static class Program
             .WithNotParsed(errs =>
             {
                 DisplayHelp(parserResult);
-                var isHelp = errs.Any(e => e.Tag == ErrorType.HelpRequestedError || e.Tag == ErrorType.VersionRequestedError);
+                var isHelp = errs.Any(e =>
+                    e.Tag == ErrorType.HelpRequestedError || e.Tag == ErrorType.VersionRequestedError
+                );
                 Environment.Exit(isHelp ? 0 : 1);
             });
 
@@ -113,9 +116,13 @@ internal static class Program
             Application.Run(mainForm);
         }
     }
+
     private static void RunHeadless()
     {
-        EventManager.SubscribeEvent("OnAddLog", (string message, LogLevel level) => Terminal.WriteLog($"[{level}] {message}"));
+        EventManager.SubscribeEvent(
+            "OnAddLog",
+            (string message, LogLevel level) => Terminal.WriteLog($"[{level}] {message}")
+        );
         EventManager.SubscribeEvent("OnChangeStatusText", (string status) => Terminal.WriteLog($"[Status] {status}"));
 
         BotCL.Initialize(ProfileManager.SelectedProfile);
@@ -124,10 +131,12 @@ internal static class Program
         while (running)
         {
             var inputLine = Terminal.ReadLine();
-            if (string.IsNullOrWhiteSpace(inputLine)) continue;
+            if (string.IsNullOrWhiteSpace(inputLine))
+                continue;
 
             var input = inputLine.Split(',');
-            if (input == null || input.Length == 0) continue;
+            if (input == null || input.Length == 0)
+                continue;
 
             var command = input[0].ToLowerInvariant();
             var args = input.Skip(1).ToArray();
@@ -141,6 +150,7 @@ internal static class Program
             CLIManager.Execute(command, args);
         }
     }
+
     private static void RunOptions(CommandLineOptions options)
     {
         if (options.LaunchClient)

@@ -6,10 +6,12 @@ namespace RSBot.Statistics
     public class StatisticsPlugin : IPlugin
     {
         public string InternalName => "RSBot.Statistics";
+
         public void Initialize()
         {
             CalculatorRegistry.Initialize();
         }
+
         public void OnLoadCharacter() { }
     }
 }

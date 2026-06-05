@@ -1,6 +1,4 @@
 ﻿namespace RSBot.Items
 {
-    public class ItemsManager
-    {
-    }
+    public class ItemsManager { }
 }

@@ -78,7 +78,10 @@ public class BotbaseManager
     /// </summary>
     /// <param name="file">The file.</param>
     /// <returns></returns>
-    private static (Dictionary<string, IBotbase> bots, Dictionary<string, IBotbaseView> views) GetExtensionsFromAssembly(string file)
+    private static (
+        Dictionary<string, IBotbase> bots,
+        Dictionary<string, IBotbaseView> views
+    ) GetExtensionsFromAssembly(string file)
     {
         var bots = new Dictionary<string, IBotbase>();
         var views = new Dictionary<string, IBotbaseView>();

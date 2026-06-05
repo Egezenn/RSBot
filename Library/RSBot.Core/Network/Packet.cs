@@ -591,9 +591,11 @@ namespace RSBot.Core.Network
                 if (Game.ClientType == GameClientType.Japanese)
                     codepage = 932;
 
-                if (Game.ClientType == GameClientType.Global
+                if (
+                    Game.ClientType == GameClientType.Global
                     || Game.ClientType == GameClientType.VTC_Game
-                    || Game.ClientType == GameClientType.Turkey)
+                    || Game.ClientType == GameClientType.Turkey
+                )
                     codepage = 65001;
 
                 return Encoding.GetEncoding(codepage).GetString(bytes);
@@ -1141,9 +1143,11 @@ namespace RSBot.Core.Network
                 if (Game.ClientType == GameClientType.Japanese)
                     codePage = 932;
 
-                if (Game.ClientType == GameClientType.Global
+                if (
+                    Game.ClientType == GameClientType.Global
                     || Game.ClientType == GameClientType.VTC_Game
-                    || Game.ClientType == GameClientType.Turkey)
+                    || Game.ClientType == GameClientType.Turkey
+                )
                     codePage = 65001;
 
                 var bytes = Encoding.GetEncoding(codePage).GetBytes(value);

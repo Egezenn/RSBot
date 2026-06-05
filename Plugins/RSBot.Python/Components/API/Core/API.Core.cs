@@ -1,10 +1,10 @@
-﻿using RSBot.Python.Components.API.Interface;
-using RSBot.Python.Views;
-using System;
+﻿using System;
 using System.Linq;
 using Python.Runtime;
 using RSBot.Core;
 using RSBot.Core.Network;
+using RSBot.Python.Components.API.Interface;
+using RSBot.Python.Views;
 
 namespace RSBot.Python.Components.API.Core
 {
@@ -55,14 +55,14 @@ namespace RSBot.Python.Components.API.Core
                     return true;
                 }
                 return false;
-
             }
             catch (Exception ex)
             {
-                Log.Error($"[Python-API] Error while trying to start the bot from Plugin: {ex}" );
+                Log.Error($"[Python-API] Error while trying to start the bot from Plugin: {ex}");
                 return false;
             }
         }
+
         private bool StopBot()
         {
             try
@@ -97,18 +97,21 @@ namespace RSBot.Python.Components.API.Core
                 return false;
             }
         }
+
         private void SendServer(ushort opcode, byte[] data, bool encrypted = false)
         {
-            Packet packet = new Packet(opcode,encrypted);
+            Packet packet = new Packet(opcode, encrypted);
             packet.WriteBytes(data);
             PacketManager.SendPacket(packet, PacketDestination.Server);
         }
+
         private void SendClient(ushort opcode, byte[] data, bool encrypted = false)
         {
             Packet packet = new Packet(opcode, encrypted);
             packet.WriteBytes(data);
             PacketManager.SendPacket(packet, PacketDestination.Client);
         }
+
         public void log(params object[] args)
         {
             if (args == null || args.Length == 0)
@@ -117,34 +120,42 @@ namespace RSBot.Python.Components.API.Core
                 return;
             }
 
-            string msg = string.Join(" ", args.Select(a =>
-            {
-                if (a == null) return "None";
-
-                if (a is PyObject pyObj)
+            string msg = string.Join(
+                " ",
+                args.Select(a =>
                 {
-                    using (Py.GIL())
+                    if (a == null)
+                        return "None";
+
+                    if (a is PyObject pyObj)
                     {
-                        return pyObj.ToString();
+                        using (Py.GIL())
+                        {
+                            return pyObj.ToString();
+                        }
                     }
-                }
-                return a.ToString();
-            }));
+                    return a.ToString();
+                })
+            );
 
             _main?.AppendLog(msg);
         }
+
         public bool start_bot()
         {
             return StartBot();
         }
+
         public bool stop_bot()
         {
             return StopBot();
         }
+
         public void send_server(ushort opcode, byte[] data, bool encrypted)
         {
             SendServer(opcode, data, encrypted);
         }
+
         public void send_client(ushort opcode, byte[] data, bool encrypted)
         {
             SendClient(opcode, data, encrypted);

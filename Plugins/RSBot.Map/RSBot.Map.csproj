@@ -23,4 +23,3 @@
     <Compile Update="Renderer\NavMeshRenderer.cs" />
   </ItemGroup>
 </Project>
-

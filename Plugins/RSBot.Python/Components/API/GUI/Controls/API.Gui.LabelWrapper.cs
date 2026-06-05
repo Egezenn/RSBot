@@ -7,8 +7,6 @@ namespace RSBot.Python.Components.API.GUI.Controls
     public class LabelWrapper : GuiControlWrapper
     {
         public LabelWrapper(Label lbl, Main form)
-            : base(lbl, form)
-        {
-        }
+            : base(lbl, form) { }
     }
 }

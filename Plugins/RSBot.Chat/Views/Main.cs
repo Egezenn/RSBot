@@ -16,10 +16,12 @@ public partial class Main : DoubleBufferedControl
         InitializeComponent();
         SubscribeEvents();
     }
+
     private void SubscribeEvents()
     {
         EventManager.SubscribeEvent("OnMessageReceived", AppendMessage);
     }
+
     /// <summary>
     ///     Sends the chat message.
     /// </summary>
@@ -30,7 +32,6 @@ public partial class Main : DoubleBufferedControl
             return;
 
         ChatManager.Send(chatType, sender.Text, txtRecievePrivate.Text);
-
     }
 
     /// <summary>

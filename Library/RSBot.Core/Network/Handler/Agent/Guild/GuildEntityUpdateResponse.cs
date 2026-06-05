@@ -1,10 +1,10 @@
-﻿using RSBot.Core.Components;
-using RSBot.Core.Objects.Spawn;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RSBot.Core.Components;
+using RSBot.Core.Objects.Spawn;
 
 namespace RSBot.Core.Network.Handler.Agent.Guild
 {
@@ -18,7 +18,7 @@ namespace RSBot.Core.Network.Handler.Agent.Guild
         {
             uint entityId = packet.ReadUInt();
             packet.ReadUInt(); //guildId
-            string guildName = packet.ReadString();            
+            string guildName = packet.ReadString();
             packet.ReadString(); //grandName
             packet.ReadUInt(); //guild emblem
             packet.ReadUInt(); //unionId

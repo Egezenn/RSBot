@@ -43,58 +43,72 @@ namespace RSBot.Python.Components.API.GUI.Controls
         {
             Invoke(() => ((ListBox)Control).Items.Add(text));
         }
+
         private void SetIndex(int index)
         {
             Invoke(() => ((ListBox)Control).SelectedIndex = index);
         }
+
         private void RemoveItem(int index)
         {
             Invoke(() => ((ListBox)Control).Items.RemoveAt(index));
         }
+
         private int GetIndex()
         {
             return ((ListBox)Control).SelectedIndex;
         }
+
         private int GetItemCount()
         {
             return ((ListBox)Control).Items.Count;
         }
+
         private string GetItem(int index)
         {
             return ((ListBox)Control).Items[index].ToString();
         }
+
         private string GetSelectedItem()
         {
             return ((ListBox)Control).SelectedItem.ToString();
         }
+
         public string get_text()
         {
             return GetText();
         }
+
         public void add_item(string text)
         {
             AddItem(text);
         }
+
         public void set_index(int index)
         {
             SetIndex(index);
         }
+
         public void remove_item(int index)
         {
             RemoveItem(index);
         }
+
         public int selected_index()
         {
             return GetIndex();
         }
+
         public int item_count()
         {
             return GetItemCount();
         }
+
         public string get_item(int index)
         {
             return GetItem(index);
         }
+
         public string get_selected_item()
         {
             return GetSelectedItem();

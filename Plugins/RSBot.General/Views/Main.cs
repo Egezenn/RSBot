@@ -1,11 +1,4 @@
-﻿using RSBot.Core;
-using RSBot.Core.Client;
-using RSBot.Core.Components;
-using RSBot.Core.Event;
-using RSBot.General.Components;
-using RSBot.General.Models;
-using SDUI.Controls;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
@@ -13,6 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RSBot.Core;
+using RSBot.Core.Client;
+using RSBot.Core.Components;
+using RSBot.Core.Event;
+using RSBot.General.Components;
+using RSBot.General.Models;
+using SDUI.Controls;
 
 namespace RSBot.General.Views;
 
@@ -114,17 +114,21 @@ internal partial class Main : DoubleBufferedControl
                 await Task.Delay(5000);
                 if (Kernel.LaunchMode == "client")
                 {
-                    BeginInvoke(new Action(() =>
-                    {
-                        btnStartClient_Click(btnStartClient, EventArgs.Empty);
-                    }));
+                    BeginInvoke(
+                        new Action(() =>
+                        {
+                            btnStartClient_Click(btnStartClient, EventArgs.Empty);
+                        })
+                    );
                 }
                 else if (Kernel.LaunchMode == "clientless")
                 {
-                    BeginInvoke(new Action(() =>
-                    {
-                        btnStartClientless_Click(btnStartClientless, EventArgs.Empty);
-                    }));
+                    BeginInvoke(
+                        new Action(() =>
+                        {
+                            btnStartClientless_Click(btnStartClientless, EventArgs.Empty);
+                        })
+                    );
                 }
             });
         }
@@ -270,6 +274,7 @@ internal partial class Main : DoubleBufferedControl
         View.PendingWindow?.Hide();
         View.PendingWindow?.StopClientlessQueueTask();
     }
+
     private void OnAutoReloginStarted()
     {
         if (this.InvokeRequired)
@@ -280,6 +285,7 @@ internal partial class Main : DoubleBufferedControl
         btnStartClient.Enabled = false;
         btnStartClientless.Enabled = false;
     }
+
     private void OnClientDisconnected()
     {
         if (this.InvokeRequired)
@@ -295,6 +301,7 @@ internal partial class Main : DoubleBufferedControl
         btnStartClient.Text = LanguageManager.GetLang("Start") + " Client";
         btnStartClientless.Text = LanguageManager.GetLang("Start") + " Clientless";
     }
+
     private void OnAutoReloginOngoing()
     {
         if (this.InvokeRequired)
@@ -307,6 +314,7 @@ internal partial class Main : DoubleBufferedControl
         btnStartClientless.Enabled = true;
         btnStartClientless.Text = LanguageManager.GetLang("Start") + " Clientless";
     }
+
     private void OnClientProcessStarted()
     {
         if (this.InvokeRequired)
@@ -317,6 +325,7 @@ internal partial class Main : DoubleBufferedControl
 
         btnStartClient.Enabled = false;
     }
+
     private void OnClientlessProcessStarted()
     {
         if (this.InvokeRequired)
@@ -327,6 +336,7 @@ internal partial class Main : DoubleBufferedControl
 
         btnStartClientless.Text = LanguageManager.GetLang("Disconnect");
     }
+
     private void OnEnterGame()
     {
         if (this.InvokeRequired)
@@ -379,7 +389,7 @@ internal partial class Main : DoubleBufferedControl
             {
                 Application.Restart();
             }
-        }       
+        }
     }
 
     /// <summary>

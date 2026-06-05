@@ -219,8 +219,7 @@ public class PickupManager
         if (applyPickOnlyChar && e.IsBehindObstacle)
             return false;
 
-        bool isItemAutoShareParty = Game.Party.IsInParty &&
-                            Game.Party.Settings.GetPartyType() is 2 or 3 or 6 or 7;
+        bool isItemAutoShareParty = Game.Party.IsInParty && Game.Party.Settings.GetPartyType() is 2 or 3 or 6 or 7;
 
         if (isItemAutoShareParty && PickupGold && e.Record.IsGold)
         {

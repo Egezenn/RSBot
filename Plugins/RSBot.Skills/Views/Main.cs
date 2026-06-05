@@ -1,3 +1,7 @@
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 using RSBot.Core;
 using RSBot.Core.Client.ReferenceObjects;
 using RSBot.Core.Components;
@@ -6,10 +10,6 @@ using RSBot.Core.Extensions;
 using RSBot.Core.Objects;
 using RSBot.Core.Objects.Skill;
 using SDUI.Controls;
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 using CheckBox = SDUI.Controls.CheckBox;
 using ListViewExtensions = RSBot.Core.Extensions.ListViewExtensions;
 
@@ -101,8 +101,6 @@ public partial class Main : DoubleBufferedControl
 
         item.LoadSkillImage();
     }
-
-    
 
     /// <summary>
     ///     Loads the settings.
@@ -555,7 +553,7 @@ public partial class Main : DoubleBufferedControl
     {
         if (this.InvokeRequired)
         {
-            this.Invoke(new Action<SkillInfo,SkillInfo>(OnSkillUpgraded), oldSkill, newSkill);
+            this.Invoke(new Action<SkillInfo, SkillInfo>(OnSkillUpgraded), oldSkill, newSkill);
             return;
         }
         LoadSkills();

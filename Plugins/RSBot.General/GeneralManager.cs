@@ -1,22 +1,25 @@
-﻿using RSBot.Core;
+﻿using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using RSBot.Core;
 using RSBot.Core.Components;
 using RSBot.Core.Event;
 using RSBot.General.Components;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RSBot.General
 {
     public class GeneralManager
     {
         private static int _reloginSeq;
-        public static bool IsClientless => Game.Clientless && Kernel.Proxy != null && Kernel.Proxy.IsConnectedToAgentserver;
+        public static bool IsClientless =>
+            Game.Clientless && Kernel.Proxy != null && Kernel.Proxy.IsConnectedToAgentserver;
         public static bool IsConnected => Kernel.Proxy != null && Kernel.Proxy.IsConnectedToAgentserver;
+
         public GeneralManager()
         {
             SubscribeEvents();
         }
+
         private void SubscribeEvents()
         {
             ClientlessManager.RegionalAuthHandler = HandleRegionalAuth;
@@ -28,6 +31,7 @@ namespace RSBot.General
             EventManager.SubscribeEvent("OnExitClient", OnExitClient);
             EventManager.SubscribeEvent("OnProfileChanged", OnProfileChanged);
         }
+
         private static async Task<bool> HandleRegionalAuth()
         {
             if (Game.ClientType == GameClientType.RuSro)
@@ -36,10 +40,12 @@ namespace RSBot.General
                 return await JSROAuthService.GetTokenAsync();
             return true;
         }
+
         private void OnAgentServerConnected()
         {
             Interlocked.Increment(ref _reloginSeq);
         }
+
         private async void OnAgentServerDisconnected()
         {
             Kernel.Bot.Stop();
@@ -78,6 +84,7 @@ namespace RSBot.General
             }
             EventManager.FireEvent("OnClientDisconnected");
         }
+
         private async void OnGatewayServerDisconnected()
         {
             AutoLogin.Pending = false;
@@ -150,6 +157,7 @@ namespace RSBot.General
                 Game.Clientless = false;
             }
         }
+
         private async void OnEnterGame()
         {
             while (!Game.Ready)
@@ -164,6 +172,7 @@ namespace RSBot.General
             if (startBot)
                 Kernel.Bot.Start();
         }
+
         private void OnExitClient()
         {
             Log.StatusLang("Ready");
@@ -180,18 +189,19 @@ namespace RSBot.General
                 if (!Kernel.Proxy.IsConnectedToAgentserver)
                     return;
 
-
                 ClientlessManager.GoClientless();
 
                 EventManager.FireEvent("OnSwitchToClientless");
 
                 Log.NotifyLang("ClientlessModeActivated");
             }
-        }        
+        }
+
         private void OnProfileChanged()
         {
             Accounts.Load();
         }
+
         private async Task StartClientProcess()
         {
             EventManager.FireEvent("OnClientProcessStarted");
@@ -207,11 +217,13 @@ namespace RSBot.General
                 }
             });
         }
+
         public static void ChangeSilkroadPath(string path)
         {
             GlobalConfig.Set("RSBot.SilkroadDirectory", Path.GetDirectoryName(path));
             GlobalConfig.Set("RSBot.SilkroadExecutable", Path.GetFileName(path));
         }
+
         public static void GoClientless()
         {
             if (Game.Clientless)
@@ -222,12 +234,13 @@ namespace RSBot.General
 
             EventManager.FireEvent("OnSwitchToClientless");
         }
+
         public static async Task StartClientlessAsync()
         {
             await Task.Run(async () =>
             {
                 if (!Game.Clientless)
-                {                    
+                {
                     Game.Clientless = true;
                     Log.StatusLang("StartingClientless");
                     EventManager.FireEvent("OnClientlessProcessStarted");
@@ -241,7 +254,7 @@ namespace RSBot.General
                 }
             });
         }
-            
+
         public static async Task DisconnectAsync()
         {
             await Task.Run(() =>
@@ -249,10 +262,11 @@ namespace RSBot.General
                 Game.Clientless = false;
 
                 EventManager.FireEvent("OnAutoReloginOngoing");
-                
-                Kernel.Proxy.Shutdown();                
+
+                Kernel.Proxy.Shutdown();
             });
         }
+
         public async Task StartClientAsync()
         {
             var userAuthenticated = await HandleRegionalAuth();
@@ -262,10 +276,11 @@ namespace RSBot.General
                 await StartClientProcess();
             }
         }
+
         public static void KillClient()
         {
             if (!IsClientless)
-            {                
+            {
                 ClientManager.Kill();
             }
         }

@@ -71,7 +71,13 @@ public partial class Main : UIWindow
     // TODO
     private void donateButton_Click(object sender, EventArgs e)
     {
-        Process.Start(new ProcessStartInfo { FileName = "https://github.com/Silkroad-Developer-Community/OasisBot", UseShellExecute = true });
+        Process.Start(
+            new ProcessStartInfo
+            {
+                FileName = "https://github.com/Silkroad-Developer-Community/OasisBot",
+                UseShellExecute = true,
+            }
+        );
     }
 
     /// <summary>
@@ -188,7 +194,11 @@ public partial class Main : UIWindow
 
         var control = newBotbaseView.Value.View;
         control.Name = newBotbaseView.Value.Name;
-        control.Text = LanguageManager.GetLangBySpecificKey(newBotbaseView.Value.Name, "TabText", newBotbaseView.Value.TabText);
+        control.Text = LanguageManager.GetLangBySpecificKey(
+            newBotbaseView.Value.Name,
+            "TabText",
+            newBotbaseView.Value.TabText
+        );
         control.Enabled = Game.Ready;
         windowPageControl.Controls.Add(control);
 
@@ -246,7 +256,7 @@ public partial class Main : UIWindow
 
             var control = extension.Value.View;
             control.Name = extension.Value.InternalName;
-            
+
             control.Text = LanguageManager.GetLangBySpecificKey(
                 extension.Value.InternalName,
                 "DisplayName",
@@ -254,7 +264,7 @@ public partial class Main : UIWindow
             );
             control.Enabled = !extension.Value.RequireIngame;
             control.Dock = DockStyle.Fill;
-            
+
             windowPageControl.Controls.Add(control);
             if (control.Name == "RSBot.Python" && !GlobalConfig.Get("RSBot.ShowPythonPlugins", true))
                 windowPageControl.Controls.Remove(control);
@@ -540,11 +550,12 @@ public partial class Main : UIWindow
             TabStop = false,
             Tag = "private",
             Text = "START + SET AREA",
-            UseVisualStyleBackColor = false
+            UseVisualStyleBackColor = false,
         };
 
         var gap = btnStartStop.Left - (btnSave.Left + btnSave.Width);
-        if (gap <= 0) gap = 6;
+        if (gap <= 0)
+            gap = 6;
 
         btnStartSetArea.Location = new Point(btnSave.Left - btnStartSetArea.Width - gap, btnSave.Top);
 
@@ -851,11 +862,12 @@ public partial class Main : UIWindow
 
         GlobalConfig.Set("RSBot.Network.BindIp", ipAddress.ToString());
     }
+
     private void pyPluginsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         pyPluginsToolStripMenuItem.Checked = !pyPluginsToolStripMenuItem.Checked;
         GlobalConfig.Set("RSBot.ShowPythonPlugins", pyPluginsToolStripMenuItem.Checked.ToString());
-        foreach( var plugin in Kernel.PluginManager.ExtensionsViews.Values)
+        foreach (var plugin in Kernel.PluginManager.ExtensionsViews.Values)
         {
             if (plugin.InternalName == "RSBot.Python")
             {
@@ -871,7 +883,6 @@ public partial class Main : UIWindow
                     if (pluginIndex == currentIndex)
                         windowPageControl.SelectedIndex = 0;
                 }
-                    
             }
         }
     }
@@ -1039,7 +1050,4 @@ public partial class Main : UIWindow
     }
 
     #endregion Core events
-
-    
 }
-

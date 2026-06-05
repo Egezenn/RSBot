@@ -1,6 +1,6 @@
+using RSBot.Core.Components.Command;
 using RSBot.Core.Plugins;
 using RSBot.General.Components;
-using RSBot.Core.Components.Command;
 
 namespace RSBot.General
 {
@@ -20,6 +20,7 @@ namespace RSBot.General
             CLIManager.Register(new ShowClientCommand());
             CLIManager.Register(new HideClientCommand());
         }
+
         public void OnLoadCharacter() { }
     }
 }

@@ -29,7 +29,7 @@ public partial class Main : DoubleBufferedControl
     /// <summary>
     ///     <inheritdoc />
     /// </summary>
-    private int _selectedIndex; 
+    private int _selectedIndex;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="Main" /> class.
@@ -600,7 +600,7 @@ public partial class Main : DoubleBufferedControl
         var useSelectedItem = itemsToUse.Contains(selectedItem.Record.CodeName);
 
         if (useSelectedItem)
-        {   
+        {
             lvItem.Font = Font;
             itemsToUse.Remove(selectedItem.Record.CodeName);
         }

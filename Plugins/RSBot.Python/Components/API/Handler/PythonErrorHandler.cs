@@ -1,6 +1,6 @@
-﻿using Python.Runtime;
-using System;
+﻿using System;
 using System.Text;
+using Python.Runtime;
 
 namespace RSBot.Python.Components.API.Handler
 {
